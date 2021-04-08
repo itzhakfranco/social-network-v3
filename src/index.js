@@ -1,6 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+
 import "./index.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "jquery/dist/jquery";
+import "popper.js/dist/popper";
+import "bootstrap/dist/js/bootstrap";
+
 import App from "./App";
 
 import { Provider } from "react-redux";
@@ -9,9 +17,11 @@ import store from "./store/store";
 
 ReactDOM.render(
 	<React.StrictMode>
-		<Provider store={store}>
-			<App />
-		</Provider>
+		<BrowserRouter>
+			<Provider store={store}>
+				<App />
+			</Provider>
+		</BrowserRouter>
 	</React.StrictMode>,
 	document.getElementById("root")
 );

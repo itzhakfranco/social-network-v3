@@ -1,0 +1,17 @@
+import { Component } from "react";
+import { connect } from "react-redux";
+import { logout } from "../../actions/auth";
+
+class Signout extends Component {
+  componentDidMount() {
+    this.props.logout();
+  }
+
+  render() {
+    return null;
+  }
+}
+
+export default connect(null, {
+  logout,
+})(Signout);

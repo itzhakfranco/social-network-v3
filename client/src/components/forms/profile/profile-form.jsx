@@ -174,12 +174,10 @@ class ProfileForm extends Form {
 	}
 }
 
-/* const mapStateToProps = (state) => ({
-	auth: state.auth,
-	profile: state.profile.profile,
-	loading: state.auth.loading,
-}); */
+const mapStateToProps = (state) => ({
+	loading: state.profile.loading,
+});
 
-export default connect(null, {
+export default connect(mapStateToProps, {
 	createProfile,
 })(ProfileForm);

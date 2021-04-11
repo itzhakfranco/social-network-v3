@@ -110,32 +110,6 @@ router.delete("/", auth, async (req, res) => {
 	}
 });
 
-router.post("/experience", auth, async (req, res) => {
-	const { error } = validateExperience(req.body);
-	if (error) return res.status(400).send(error.details[0].message);
-
-	const newExp = {
-		title: req.body.title,
-		company: req.body.company,
-		location: req.body.location,
-		from: req.body.from,
-		to: req.body.to,
-		current: req.body.current,
-		description: req.body.description,
-	};
-
-	try {
-		const profile = await Profile.findOne({ user: req.user.id });
-		profile.experience.unshift(newExp);
-
-		await profile.save();
-		return res.status(201).json(profile);
-	} catch (err) {
-		console.error(err.message);
-		return res.status(500).send("Server Error");
-	}
-});
-
 router.post("/education", auth, async (req, res) => {
 	const { error } = validateEducation(req.body);
 
@@ -157,21 +131,6 @@ router.post("/education", auth, async (req, res) => {
 		await profile.save();
 
 		return res.json(profile);
-	} catch (err) {
-		console.error(err.message);
-		return res.status(500).send("Server Error");
-	}
-});
-
-router.get("/experience/:id", auth, async (req, res) => {
-	try {
-		const profile = await Profile.findOne({
-			user: req.user.id,
-		});
-		if (!profile) res.status(400).send("Invalid experince Id");
-		return res.json(
-			profile.experience.filter((exp) => exp._id == req.params.id)[0]
-		);
 	} catch (err) {
 		console.error(err.message);
 		return res.status(500).send("Server Error");
@@ -204,52 +163,6 @@ router.put("/education/edit/:id", auth, async (req, res) => {
 	await profile.save();
 
 	return res.json(profile);
-});
-
-router.put("/experience/edit/:id", auth, async (req, res) => {
-	const { error } = validateExperience(req.body);
-	if (error) return res.status(400).send(error.details[0].message);
-
-	const profile = await Profile.findOne({ user: req.user.id });
-
-	const experiencePosition = profile.experience.findIndex(
-		(exp) => exp._id.toString() === req.params.id
-	);
-
-	const updatedExperince = {
-		_id: profile.experience[experiencePosition]._id,
-		title: req.body.title,
-		company: req.body.company,
-		location: req.body.location,
-		from: req.body.from,
-		to: req.body.to,
-		current: req.body.current,
-		description: req.body.description,
-	};
-
-	profile.experience[experiencePosition] = updatedExperince;
-
-	await profile.save();
-
-	return res.json(profile);
-});
-
-router.delete("/experience/:exp_id", auth, async (req, res) => {
-	try {
-		const profile = await Profile.findOne({ user: req.user.id });
-
-		const removeIndex = profile.experience
-			.map((item) => item.id)
-			.indexOf(req.params.exp_id);
-
-		profile.experience.splice(removeIndex, 1);
-
-		await profile.save();
-		res.json(profile);
-	} catch (err) {
-		console.error(err.message);
-		res.status(500).send("Server Error");
-	}
 });
 
 router.delete("/education/:edu_id", auth, async (req, res) => {

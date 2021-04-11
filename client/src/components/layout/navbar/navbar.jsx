@@ -3,8 +3,9 @@ import { Link, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
 import GuestLinks from "./guest-links";
+import MembersLinks from "./member-links";
 
-const Navbar = () => {
+const Navbar = ({ token, hasProfile, name }) => {
 	return (
 		<nav className='navbar navbar-expand-lg navbar-light shadow-sm'>
 			<div className='container'>
@@ -21,11 +22,20 @@ const Navbar = () => {
 				</button>
 
 				<div className='collapse navbar-collapse' id='navbarSupportedContent'>
-					<>{GuestLinks}</>
+					<>
+						{token && <MembersLinks hasProfile={hasProfile} name={name} />}
+						{!token && <GuestLinks />}
+					</>
 				</div>
 			</div>
 		</nav>
 	);
 };
 
-export default Navbar;
+const mapStateToProps = (state) => ({
+	token: state.user.token,
+	hasProfile: state.user.hasProfile,
+	name: state.user.name,
+});
+
+export default connect(mapStateToProps, {})(Navbar);

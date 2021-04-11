@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 
-const memberLinks = (
-	<Fragment>
+const MemberLinks = ({ hasProfile, name }) => (
+	<>
 		<ul className='navbar-nav mr-auto'>
 			<li className='nav-item'>
 				<NavLink className='nav-link btn text-dark' to='/profiles'>
@@ -20,7 +20,7 @@ const memberLinks = (
 			</li>
 		</ul>
 		<ul className='navbar-nav ml-auto'>
-			<li className='nav-item '>
+			<li className='nav-item'>
 				<NavLink
 					className='btn btn-primary nav-link text-white mr-4'
 					to='/user/add-post'
@@ -29,23 +29,28 @@ const memberLinks = (
 				</NavLink>
 			</li>
 
-			<li className='nav-item'>
-				<NavLink
-					className='nav-link btn btn-secondary text-white mr-4'
-					to={`/user/profile/`}
-				>
-					<i className='far fa-user mx-1'></i> User Name Profile
-				</NavLink>
-			</li>
+			{hasProfile && (
+				<li className='nav-item'>
+					<NavLink
+						className='nav-link btn btn-secondary text-white mr-4'
+						to={`/user/profile/`}
+					>
+						<i className='far fa-user mx-1'></i>
+						{`${name.split(" ")[1]} Profile`}
+					</NavLink>
+				</li>
+			)}
 
-			<li className='nav-item '>
-				<NavLink
-					className='nav-link btn btn-secondary text-white mr-4'
-					to={`/user/create-profile`}
-				>
-					<i className='far fa-user mx-1'></i> Create Profile
-				</NavLink>
-			</li>
+			{!hasProfile && (
+				<li className='nav-item '>
+					<NavLink
+						className='nav-link btn btn-secondary text-white mr-4'
+						to={`/user/create-profile`}
+					>
+						<i className='far fa-user mx-1'></i> Create Profile
+					</NavLink>
+				</li>
+			)}
 
 			<li className='nav-item'>
 				<NavLink className='btn btn-dark nav-link text-white' to='#'>
@@ -53,6 +58,6 @@ const memberLinks = (
 				</NavLink>
 			</li>
 		</ul>
-	</Fragment>
+	</>
 );
-export default memberLinks;
+export default MemberLinks;

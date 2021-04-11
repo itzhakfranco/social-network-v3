@@ -5,9 +5,10 @@ import {
 	REGISTER_REQUEST,
 	REGISTER_SUCCESS,
 	REGISTER_FAIL,
+	LOGIN_REQUEST,
 	LOGIN_SUCCESS,
 	LOGOUT,
-} from "./authTypes";
+} from "./userTypes";
 
 export const signup = (formData) => async (dispatch) => {
 	dispatch({
@@ -16,11 +17,14 @@ export const signup = (formData) => async (dispatch) => {
 	const { data } = await http.post(`${apiUrl}/users`, formData);
 	dispatch({
 		type: REGISTER_SUCCESS,
-		payload: data.token,
+		payload: data,
 	});
 };
 
 export const signin = (email, password) => async (dispatch) => {
+	dispatch({
+		type: LOGIN_REQUEST,
+	});
 	const { data } = await http.post(`${apiUrl}/auth`, { email, password });
 
 	dispatch({

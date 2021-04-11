@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-const GuestLinks = (
+const GuestLinks = () => (
 	<>
 		<ul className='navbar-nav mr-auto'>
 			<li className='nav-item'>

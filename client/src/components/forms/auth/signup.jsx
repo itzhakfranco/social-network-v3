@@ -4,7 +4,7 @@ import Joi from "joi-browser";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { signup } from "../../../store/auth/authActions";
+import { signup } from "../../../store/user/userActions";
 import PageHeader from "../../common/page-header";
 
 class Signup extends Form {

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
+const { Profile } = require("../models/Profile");
 const bcrypt = require("bcryptjs");
 const Joi = require("@hapi/joi");
 
@@ -16,7 +17,10 @@ router.post("/", async (req, res) => {
 	const validPassword = await bcrypt.compare(password, user.password);
 	if (!validPassword) return res.status(400).send("Invalid email or password.");
 
-	return res.json({ token: user.generateAuthToken() });
+	const profile = await Profile.find({ user_id: user._id });
+	const hasProfile = profile.length > 0 ? true : false;
+
+	res.json({ token: user.generateAuthToken(), hasProfile, name: user.name });
 });
 
 function validate(req) {

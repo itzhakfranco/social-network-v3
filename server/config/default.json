@@ -1,4 +1,0 @@
-{
-  "jwtSecret": "mySecretToken",
-  "mongoURI": "mongodb+srv://koko:koko123456@cluster0-gzkpp.mongodb.net/dev-connect-final?retryWrites=true&w=majority"
-}

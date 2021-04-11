@@ -1,13 +1,13 @@
 import React from "react";
-import Form from "../common/form";
+import Form from "../../common/form";
 import Joi from "joi-browser";
 import { Redirect, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { connect } from "react-redux";
-import { signin } from "../../store/auth/authActions";
+import { signin } from "../../../store/auth/authActions";
 
-import PageHeader from "../common/page-header";
+import PageHeader from "../../common/page-header";
 
 class Signin extends Form {
 	state = {

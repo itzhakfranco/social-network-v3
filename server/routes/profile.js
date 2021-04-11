@@ -14,7 +14,7 @@ router.post("/", auth, async (req, res) => {
 	if (errors) return res.status(400).send(errors.details[0].message);
 
 	let profile = new Profile({
-		user: req.user.id,
+		user_id: req.user.id,
 		name: req.user.name,
 		company: req.body.company,
 		location: req.body.location,
@@ -26,9 +26,8 @@ router.post("/", auth, async (req, res) => {
 		status: req.body.status,
 		image: req.body.image && req.body.image,
 	});
-	await profile.save();
-	// let newProfile = await profile.save(); res.json(newProfile);
 
+	await profile.save();
 	res.json(profile);
 });
 

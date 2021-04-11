@@ -7,8 +7,8 @@ export const createProfile = (formData) => async (dispatch) => {
 	dispatch({
 		type: CREATE_PROFILE_SUCCESS,
 	});
-	const { data } = await http.post(`${apiUrl}/profile`, formData);
-	console.log(data);
+	const res = await http.post(`${apiUrl}/profile`, formData);
+	console.log(res);
 	/* 	dispatch({
 		type: REGISTER_SUCCESS,
 		payload: data.token,

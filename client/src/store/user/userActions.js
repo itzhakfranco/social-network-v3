@@ -32,3 +32,7 @@ export const signin = (email, password) => async (dispatch) => {
 		payload: data,
 	});
 };
+
+export const logout = () => (dispatch) => {
+	dispatch({ type: LOGOUT });
+};

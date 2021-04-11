@@ -9,6 +9,8 @@ import { signin } from "../../../store/user/userActions";
 
 import PageHeader from "../../common/page-header";
 
+import { getCurrentUser } from "../../../utils/utils";
+
 class Signin extends Form {
 	state = {
 		data: { email: "", password: "" },
@@ -34,7 +36,7 @@ class Signin extends Form {
 	};
 
 	render() {
-		//if (this.props.auth.token) return <Redirect to='/user/dashboard' />;
+		if (this.props.token) return <Redirect to='/user/dashboard' />;
 		return (
 			<div className='container'>
 				<div className='row'>
@@ -73,7 +75,7 @@ class Signin extends Form {
 }
 
 const mapStateToProps = (state) => ({
-	auth: state.auth,
+	token: state.user.token,
 });
 
 export default connect(mapStateToProps, { signin })(Signin);

@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-const MemberLinks = ({ hasProfile, name }) => (
+const MemberLinks = ({ hasProfile, name, logout }) => (
 	<>
 		<ul className='navbar-nav mr-auto'>
 			<li className='nav-item'>
@@ -36,7 +36,7 @@ const MemberLinks = ({ hasProfile, name }) => (
 						to={`/user/profile/`}
 					>
 						<i className='far fa-user mx-1'></i>
-						{`${name.split(" ")[1]} Profile`}
+						{`${name} Profile`}
 					</NavLink>
 				</li>
 			)}
@@ -53,7 +53,13 @@ const MemberLinks = ({ hasProfile, name }) => (
 			)}
 
 			<li className='nav-item'>
-				<NavLink className='btn btn-dark nav-link text-white' to='#'>
+				<NavLink
+					onClick={() => {
+						logout();
+					}}
+					className='btn btn-dark nav-link text-white'
+					to='#'
+				>
 					<i className='fas fa-sign-out-alt mx-1'></i>Signout
 				</NavLink>
 			</li>

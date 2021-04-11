@@ -2,10 +2,12 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
+import { logout } from "../../../store/user/userActions";
+
 import GuestLinks from "./guest-links";
 import MembersLinks from "./member-links";
 
-const Navbar = ({ token, hasProfile, name }) => {
+const Navbar = ({ token, hasProfile, name, logout }) => {
 	return (
 		<nav className='navbar navbar-expand-lg navbar-light shadow-sm'>
 			<div className='container'>
@@ -23,7 +25,13 @@ const Navbar = ({ token, hasProfile, name }) => {
 
 				<div className='collapse navbar-collapse' id='navbarSupportedContent'>
 					<>
-						{token && <MembersLinks hasProfile={hasProfile} name={name} />}
+						{token && (
+							<MembersLinks
+								hasProfile={hasProfile}
+								name={name}
+								logout={logout}
+							/>
+						)}
 						{!token && <GuestLinks />}
 					</>
 				</div>
@@ -38,4 +46,4 @@ const mapStateToProps = (state) => ({
 	name: state.user.name,
 });
 
-export default connect(mapStateToProps, {})(Navbar);
+export default connect(mapStateToProps, { logout })(Navbar);

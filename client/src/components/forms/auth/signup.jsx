@@ -2,7 +2,7 @@ import React from "react";
 import Form from "../../common/form";
 import Joi from "joi-browser";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { signup } from "../../../store/user/userActions";
 import PageHeader from "../../common/page-header";
@@ -32,7 +32,7 @@ class Signup extends Form {
 	};
 
 	render() {
-		//	if (this.props.auth.token) return <Redirect to='/user/dashboard' />;
+		if (this.props.token) return <Redirect to='/user/dashboard' />;
 		return (
 			<div className='container'>
 				<div className='row'>
@@ -71,7 +71,7 @@ class Signup extends Form {
 }
 
 const mapStateToProps = (state) => ({
-	user: state.user,
+	token: state.user.token,
 });
 
 export default connect(mapStateToProps, { signup })(Signup);

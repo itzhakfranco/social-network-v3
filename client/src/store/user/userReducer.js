@@ -44,6 +44,15 @@ const userReducer = (state = intialState, action) => {
 				name: payload.name,
 				loading: false,
 			};
+		case LOGOUT:
+		case REGISTER_FAIL:
+			localStorage.removeItem("token");
+			return {
+				token: null,
+				hasProfile: false,
+				name: "",
+				loading: false,
+			};
 		default:
 			return state;
 	}

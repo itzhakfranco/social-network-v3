@@ -6,10 +6,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { connect } from "react-redux";
 import { signin } from "../../../store/user/userActions";
-
+import PreLoader from "../../../utils/pre-loader";
 import PageHeader from "../../common/page-header";
-
-import { getCurrentUser } from "../../../utils/utils";
 
 class Signin extends Form {
 	state = {
@@ -36,7 +34,10 @@ class Signin extends Form {
 	};
 
 	render() {
-		if (this.props.token) return <Redirect to='/user/dashboard' />;
+		const { token, loading } = this.props;
+
+		if (token) return <Redirect to='/user/dashboard' />;
+		if (loading) return <PreLoader />;
 		return (
 			<div className='container'>
 				<div className='row'>
@@ -76,6 +77,7 @@ class Signin extends Form {
 
 const mapStateToProps = (state) => ({
 	token: state.user.token,
+	loading: state.user.loading,
 });
 
 export default connect(mapStateToProps, { signin })(Signin);

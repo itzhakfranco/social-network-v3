@@ -6,6 +6,7 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { signup } from "../../../store/user/userActions";
 import PageHeader from "../../common/page-header";
+import PreLoader from "../../../utils/pre-loader";
 
 class Signup extends Form {
 	state = {
@@ -32,7 +33,9 @@ class Signup extends Form {
 	};
 
 	render() {
-		if (this.props.token) return <Redirect to='/user/dashboard' />;
+		const { token, loading } = this.props;
+		if (token) return <Redirect to='/user/dashboard' />;
+		if (loading) return <PreLoader />;
 		return (
 			<div className='container'>
 				<div className='row'>
@@ -72,6 +75,7 @@ class Signup extends Form {
 
 const mapStateToProps = (state) => ({
 	token: state.user.token,
+	loading: state.user.loading,
 });
 
 export default connect(mapStateToProps, { signup })(Signup);

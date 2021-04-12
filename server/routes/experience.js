@@ -5,6 +5,7 @@ const auth = require("../middleware/auth");
 const { Profile } = require("../models/Profile");
 const { Experience, validateExperience } = require("../models/Experience");
 
+//add new Experience
 router.post("/", auth, async (req, res) => {
 	const { error } = validateExperience(req.body);
 	if (error) return res.status(400).send(error.details[0].message);
@@ -28,14 +29,14 @@ router.post("/", auth, async (req, res) => {
 	return res.status(201).json(newExp);
 });
 
-router.get("/experience/:id", auth, async (req, res) => {
+//get loggedIn user experiences
+router.get("/", auth, async (req, res) => {
 	const profile = await Profile.findOne({
-		user: req.user.id,
+		user_id: req.user.id,
 	});
-	if (!profile) res.status(400).send("Invalid experince Id");
-	return res.json(
-		profile.experience.filter((exp) => exp._id == req.params.id)[0]
-	);
+
+	const experiences = await Experience.find({ profile_id: profile._id });
+	res.status(200).json(experiences);
 });
 
 router.put("/experience/edit/:id", auth, async (req, res) => {

@@ -4,6 +4,8 @@ import { apiUrl } from "../../config.json";
 import {
 	CREATE_EXPERIENCE_REQUEST,
 	CREATE_EXPERIENCE_SUCCESS,
+	FETCH_USER_EXPERIENCES_REQUEST,
+	FETCH_USER_EXPERIENCES_SUCCESS,
 } from "./experienceType";
 
 export const addExperience = (formData) => async (dispatch) => {
@@ -17,14 +19,14 @@ export const addExperience = (formData) => async (dispatch) => {
 	});
 };
 
-export const fetchUserExperiences = (formData) => async (dispatch) => {
+export const fetchUserExperiences = () => async (dispatch) => {
 	dispatch({
-		type: CREATE_EXPERIENCE_REQUEST,
+		type: FETCH_USER_EXPERIENCES_REQUEST,
 	});
-	const { data } = await http.post(`${apiUrl}/profile/experience`, formData);
-	console.log(data);
+	const { data } = await http.get(`${apiUrl}/profile/experience`);
+
 	dispatch({
-		type: CREATE_EXPERIENCE_SUCCESS,
+		type: FETCH_USER_EXPERIENCES_SUCCESS,
 		payload: data,
 	});
 };

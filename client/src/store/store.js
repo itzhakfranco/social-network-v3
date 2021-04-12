@@ -10,7 +10,7 @@ const composeEnhancers = composeWithDevTools({});
 const rootReducer = combineReducers({
 	user: userReducer,
 	profile: profileReducer,
-	experience: experienceReducer,
+	experiences: experienceReducer,
 });
 
 const store = createStore(

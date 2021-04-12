@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import PageHeader from "../../common/page-header";
-import { ExperienceTable } from "./experience-table";
+import ExperienceTable from "./experience-table";
+
 const Dashboard = ({ name }) => {
 	return (
 		<>

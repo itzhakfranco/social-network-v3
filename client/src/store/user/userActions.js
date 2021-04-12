@@ -26,7 +26,6 @@ export const signin = (email, password) => async (dispatch) => {
 		type: LOGIN_REQUEST,
 	});
 	const { data } = await http.post(`${apiUrl}/auth`, { email, password });
-
 	dispatch({
 		type: LOGIN_SUCCESS,
 		payload: data,

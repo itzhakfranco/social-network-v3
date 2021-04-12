@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PageHeader from "../../common/page-header";
 import ExperienceTable from "./experience-table";
+import { fetchUserExperiences } from "../../../store/experience/experienceActions";
 
-const Dashboard = ({ name }) => {
+const Dashboard = ({ name, experiences, fetchUserExperiences }) => {
+	useEffect(() => {
+		fetchUserExperiences();
+	}, []);
 	return (
 		<>
 			<div className='container'>
@@ -15,13 +19,16 @@ const Dashboard = ({ name }) => {
 						/>
 					</div>
 				</div>
+				{experiences?.length > 0 && (
+					<ExperienceTable experiences={experiences} />
+				)}
 			</div>
-			<ExperienceTable />
 		</>
 	);
 };
 const mapStateToProps = (state) => ({
 	name: state.user.name,
+	experiences: state.experiences.experiences,
 });
 
-export default connect(mapStateToProps, {})(Dashboard);
+export default connect(mapStateToProps, { fetchUserExperiences })(Dashboard);

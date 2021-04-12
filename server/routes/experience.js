@@ -2,17 +2,18 @@ const express = require("express");
 const router = express.Router();
 
 const auth = require("../middleware/auth");
+const { Profile } = require("../models/Profile");
 const { Experience, validateExperience } = require("../models/Experience");
-const User = require("../models/User");
 
-router.post("/experience", auth, async (req, res) => {
+router.post("/", auth, async (req, res) => {
 	const { error } = validateExperience(req.body);
 	if (error) return res.status(400).send(error.details[0].message);
 
-	let profile = await Profile.findOne({ user_id: req.body.id });
+	let profile = await Profile.findOne({ user_id: req.user.id });
 	if (!profile) return res.status(400).send("This user has no profile");
 
 	let newExp = new Experience({
+		user_id: req.user.id,
 		profile_id: profile._id,
 		title: req.body.title,
 		company: req.body.company,
@@ -77,3 +78,5 @@ router.delete("/experience/:exp_id", auth, async (req, res) => {
 	await profile.save();
 	res.json(profile);
 });
+
+module.exports = router;

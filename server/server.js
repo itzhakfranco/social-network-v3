@@ -12,13 +12,14 @@ app.use("/api/auth/", require("./routes/auth"));
 app.use("/api/users/", require("./routes/users"));
 app.use("/api/posts/", require("./routes/posts"));
 app.use("/api/profile/", require("./routes/profile"));
+app.use("/api/profile/experience/", require("./routes/experience"));
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.resolve(__dirname, "client/build")));
+	app.use(express.static(path.resolve(__dirname, "client/build")));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client/build", "index.html"));
-  });
+	app.get("*", (req, res) => {
+		res.sendFile(path.resolve(__dirname, "client/build", "index.html"));
+	});
 }
 
 const PORT = process.env.PORT || 7777;

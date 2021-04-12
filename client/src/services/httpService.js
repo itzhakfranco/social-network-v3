@@ -1,7 +1,11 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-axios.defaults.headers.common["x-auth-token"] = localStorage.getItem("token");
+function getToken() {
+	return localStorage.getItem("token");
+}
+
+axios.defaults.headers.common["x-auth-token"] = getToken();
 
 axios.interceptors.response.use(null, (error) => {
 	const expectedError = error.response && error.response.status >= 403;

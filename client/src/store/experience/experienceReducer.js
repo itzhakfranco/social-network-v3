@@ -1,7 +1,7 @@
 import {
 	CREATE_EXPERIENCE_REQUEST,
 	CREATE_EXPERIENCE_SUCCESS,
-} from "./profileType";
+} from "./experienceType";
 
 const intialState = {
 	experience: null,
@@ -10,15 +10,15 @@ const intialState = {
 
 const authReducer = (state = intialState, action) => {
 	switch (action.type) {
-		case CREATE_PROFILE_REQUEST:
+		case CREATE_EXPERIENCE_REQUEST:
 			return {
 				...state,
 				loading: true,
 			};
-		case CREATE_PROFILE_SUCCESS:
+		case CREATE_EXPERIENCE_SUCCESS:
 			return {
+				experience: action.payload,
 				loading: false,
-				profile: action.payload,
 			};
 
 		default:

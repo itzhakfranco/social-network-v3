@@ -1,8 +1,9 @@
 import React from "react";
 import Form from "../../common/form";
 import Joi from "joi-browser";
+import PreLoader from "../../../utils/pre-loader";
 import { connect } from "react-redux";
-//import { addExperience, editExperience } from "../../actions/profile";
+import { addExperience } from "../../../store/experience/experienceActions";
 import { toast } from "react-toastify";
 
 class AddExperience extends Form {
@@ -57,10 +58,16 @@ class AddExperience extends Form {
 			data: { ...this.state.data, current: !this.state.data.current },
 		});
 	};
-	/* 	doSubmit = () => {
+
+	doSubmit = () => {
 		const { data } = this.state;
-		const { addExperience, editExperience, match, history } = this.props;
-		if (!match.params.id) {
+		const { addExperience, match, history } = this.props;
+
+		addExperience(data);
+		history.replace("/user/dashboard");
+		toast.success("Experience was added successfully");
+
+		/* 	if (!match.params.id) {
 			addExperience(data);
 			history.replace("/user/dashboard");
 			toast.success("Experience was added successfully");
@@ -68,9 +75,12 @@ class AddExperience extends Form {
 			editExperience(data, match.params.id);
 			history.replace("/user/dashboard");
 			toast.success("Experience was Updated successfully");
-		}
-	}; */
+		} */
+	};
 	render() {
+		{
+			this.props.loading && <PreLoader />;
+		}
 		return (
 			<>
 				<form
@@ -171,4 +181,7 @@ class AddExperience extends Form {
 	}
 }
 
-export default connect(null, {})(AddExperience);
+const mapStateToProps = (state) => ({
+	loading: state.experience.loading,
+});
+export default connect(mapStateToProps, { addExperience })(AddExperience);

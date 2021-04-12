@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 const Joi = require("@hapi/joi");
 
 const experienceSchema = new mongoose.Schema({
+	user_id: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "User",
+	},
 	profile_id: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "Profile",

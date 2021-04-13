@@ -23,7 +23,7 @@ function App() {
 					<Route path='/user/signin' component={Signin} />
 					<Route path='/user/create-profile' component={ProfileForm} />
 					<Route path='/user/dashboard' component={Dashboard} />
-					<Route path='/user/profile/experience' component={ExperienceForm} />
+					<Route path='/user/experience/edit/:id' component={ExperienceForm} />
 				</Switch>
 			</main>
 			<footer></footer>

@@ -3,7 +3,10 @@ import Form from "../../common/form";
 import Joi from "joi-browser";
 import PreLoader from "../../../utils/pre-loader";
 import { connect } from "react-redux";
-import { addExperience } from "../../../store/experience/experienceActions";
+import {
+	addExperience,
+	fetchExperienceById,
+} from "../../../store/experience/experienceActions";
 import { toast } from "react-toastify";
 
 class AddExperience extends Form {
@@ -22,11 +25,12 @@ class AddExperience extends Form {
 	};
 
 	async componentDidMount() {
-		/* 		const { match } = this.props;
+		const { match, experience } = this.props;
 		if (match.params.id) {
-			const { data } = await profileService.getExperienceById(match.params.id);
-			this.setState({ data: this.mapToView(data) });
-		} */
+			this.props.fetchExperienceById(match.params.id);
+		}
+		console.log(experience);
+		this.setState({ data: this.mapToView(experience) });
 	}
 
 	mapToView(experience) {
@@ -182,6 +186,9 @@ class AddExperience extends Form {
 }
 
 const mapStateToProps = (state) => ({
+	experience: state.experiences.experience,
 	loading: state.experiences.loading,
 });
-export default connect(mapStateToProps, { addExperience })(AddExperience);
+export default connect(mapStateToProps, { addExperience, fetchExperienceById })(
+	AddExperience
+);

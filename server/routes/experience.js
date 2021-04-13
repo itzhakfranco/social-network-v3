@@ -5,7 +5,7 @@ const auth = require("../middleware/auth");
 const { Profile } = require("../models/Profile");
 const { Experience, validateExperience } = require("../models/Experience");
 
-//add new Experience
+//Add new Experience
 router.post("/", auth, async (req, res) => {
 	const { error } = validateExperience(req.body);
 	if (error) return res.status(400).send(error.details[0].message);
@@ -31,7 +31,7 @@ router.post("/", auth, async (req, res) => {
 	return res.status(201).json(newExp);
 });
 
-//get loggedIn user experiences
+//Get loggedIn User Experiences
 router.get("/", auth, async (req, res) => {
 	const profile = await Profile.findOne({
 		user_id: req.user.id,
@@ -41,18 +41,23 @@ router.get("/", auth, async (req, res) => {
 	res.status(200).json(experiences);
 });
 
-router.put("/experience/edit/:id", auth, async (req, res) => {
+//Get Experience By Id
+router.get("/:id", auth, async (req, res) => {
+	const experience = await Experience.findOne({
+		user_id: req.user.id,
+		_id: req.params.id,
+	});
+
+	if (!experience) return res.status(400).send("Invalid Experience ID");
+	res.status(200).json(experience);
+});
+
+//Update Experience
+router.put("/edit/:id", auth, async (req, res) => {
 	const { error } = validateExperience(req.body);
 	if (error) return res.status(400).send(error.details[0].message);
 
-	const profile = await Profile.findOne({ user: req.user.id });
-
-	const experiencePosition = profile.experience.findIndex(
-		(exp) => exp._id.toString() === req.params.id
-	);
-
-	const updatedExperince = {
-		_id: profile.experience[experiencePosition]._id,
+	const experience = {
 		title: req.body.title,
 		company: req.body.company,
 		location: req.body.location,
@@ -62,11 +67,17 @@ router.put("/experience/edit/:id", auth, async (req, res) => {
 		description: req.body.description,
 	};
 
-	profile.experience[experiencePosition] = updatedExperince;
+	const filter = {
+		user_id: req.user.id,
+		_id: req.params.id,
+	};
 
-	await profile.save();
-
-	return res.json(profile);
+	const updatedExperience = await Experience.findOneAndUpdate(
+		filter,
+		experience,
+		{ new: true }
+	);
+	res.send(updatedExperience);
 });
 
 router.delete("/experience/:exp_id", auth, async (req, res) => {

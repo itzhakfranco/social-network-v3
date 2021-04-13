@@ -5,11 +5,13 @@ import {
 	FETCH_USER_EXPERIENCES_REQUEST,
 	FETCH_EXPERIENCE_BY_ID_REQUEST,
 	FETCH_EXPERIENCE_BY_ID_SUCCESS,
+	UPDATE_EXPERIENCE_REQUEST,
+	UPDATE_EXPERIENCE_SUCCESS,
 } from "./experienceType";
 
 const intialState = {
 	experiences: [],
-	experience: [],
+	experience: {},
 	loading: false,
 };
 
@@ -42,6 +44,18 @@ const experienceReducer = (state = intialState, action) => {
 				loading: true,
 			};
 		case FETCH_EXPERIENCE_BY_ID_SUCCESS:
+			return {
+				...state,
+				loading: false,
+				experience: action.payload,
+			};
+
+		case UPDATE_EXPERIENCE_REQUEST:
+			return {
+				...state,
+				loading: true,
+			};
+		case UPDATE_EXPERIENCE_SUCCESS:
 			return {
 				...state,
 				experience: action.payload,

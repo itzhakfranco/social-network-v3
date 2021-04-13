@@ -8,6 +8,8 @@ import {
 	FETCH_USER_EXPERIENCES_SUCCESS,
 	FETCH_EXPERIENCE_BY_ID_REQUEST,
 	FETCH_EXPERIENCE_BY_ID_SUCCESS,
+	UPDATE_EXPERIENCE_REQUEST,
+	UPDATE_EXPERIENCE_SUCCESS,
 } from "./experienceType";
 
 export const addExperience = (formData) => async (dispatch) => {
@@ -44,6 +46,26 @@ export const fetchExperienceById = (experienceId) => async (dispatch) => {
 
 	dispatch({
 		type: FETCH_EXPERIENCE_BY_ID_SUCCESS,
+		payload: data,
+	});
+
+	return data;
+};
+
+export const updateExperience = (experienceId, updatedExperience) => async (
+	dispatch
+) => {
+	dispatch({
+		type: UPDATE_EXPERIENCE_REQUEST,
+	});
+
+	const { data } = await http.put(
+		`${apiUrl}/profile/experience/edit/${experienceId}`,
+		updatedExperience
+	);
+
+	dispatch({
+		type: UPDATE_EXPERIENCE_SUCCESS,
 		payload: data,
 	});
 };

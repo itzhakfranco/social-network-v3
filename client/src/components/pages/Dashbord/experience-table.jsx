@@ -12,7 +12,7 @@ const ExperienceTable = ({ experiences }) => {
 					<Link
 						className='btn btn-success float-right'
 						role='button'
-						to='/user/create-profile'
+						to='/user/experience'
 					>
 						<i className='fab fa-black-tie text-white mr-2'></i>Add Experience
 					</Link>

@@ -7,7 +7,7 @@ import moment from "moment";
 class ExperienceRow extends Component {
 	render() {
 		return this.props.experiences.map((exp, index) => (
-			<tr>
+			<tr key={index}>
 				<th scope='row'>{++index}</th>
 				<td>{exp.company}</td>
 				<td className='hide-sm'>{exp.title}</td>

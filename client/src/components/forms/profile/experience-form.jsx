@@ -5,11 +5,12 @@ import PreLoader from "../../../utils/pre-loader";
 import { connect } from "react-redux";
 import {
 	addExperience,
+	updateExperience,
 	fetchExperienceById,
 } from "../../../store/experience/experienceActions";
 import { toast } from "react-toastify";
 
-class AddExperience extends Form {
+class ExperienceForm extends Form {
 	state = {
 		data: {
 			company: "",
@@ -25,12 +26,11 @@ class AddExperience extends Form {
 	};
 
 	async componentDidMount() {
-		const { match, experience } = this.props;
+		const { match, fetchExperienceById } = this.props;
 		if (match.params.id) {
-			this.props.fetchExperienceById(match.params.id);
+			const experience = await fetchExperienceById(match.params.id);
+			this.setState({ data: this.mapToView(experience) });
 		}
-		console.log(experience);
-		this.setState({ data: this.mapToView(experience) });
 	}
 
 	mapToView(experience) {
@@ -67,19 +67,15 @@ class AddExperience extends Form {
 		const { data } = this.state;
 		const { addExperience, match, history } = this.props;
 
-		addExperience(data);
-		history.replace("/user/dashboard");
-		toast.success("Experience was added successfully");
-
-		/* 	if (!match.params.id) {
+		if (!match.params.id) {
 			addExperience(data);
 			history.replace("/user/dashboard");
 			toast.success("Experience was added successfully");
 		} else {
-			editExperience(data, match.params.id);
+			updateExperience(match.params.id, data);
 			history.replace("/user/dashboard");
 			toast.success("Experience was Updated successfully");
-		} */
+		}
 	};
 	render() {
 		{
@@ -189,6 +185,8 @@ const mapStateToProps = (state) => ({
 	experience: state.experiences.experience,
 	loading: state.experiences.loading,
 });
-export default connect(mapStateToProps, { addExperience, fetchExperienceById })(
-	AddExperience
-);
+export default connect(mapStateToProps, {
+	addExperience,
+	fetchExperienceById,
+	updateExperience,
+})(ExperienceForm);

@@ -21,9 +21,10 @@ function App() {
 				<Switch>
 					<Route path='/user/signup' component={Signup} />
 					<Route path='/user/signin' component={Signin} />
-					<Route path='/user/create-profile' component={ProfileForm} />
 					<Route path='/user/dashboard' component={Dashboard} />
+					<Route path='/user/create-profile' component={ProfileForm} />
 					<Route path='/user/experience/edit/:id' component={ExperienceForm} />
+					<Route path='/user/experience' component={ExperienceForm} />
 				</Switch>
 			</main>
 			<footer></footer>

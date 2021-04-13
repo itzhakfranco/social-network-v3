@@ -30,16 +30,26 @@ const saveState = (state) => {
 	localStorage.setItem("state", serializedState);
 };
 
-const peristedState = loadState();
-
 const store = createStore(
 	rootReducer,
-	peristedState,
+	loadState(),
 	composeEnhancers(applyMiddleware(thunk))
 );
 
 store.subscribe(() => {
 	saveState(store.getState());
 });
+
+/* Serialization is an expensive operation. 
+You should use a throttle function (like the one implemented by lodash) 
+to limit the number of saves.
+
+Eg:
+
+import throttle from 'lodash/throttle';
+
+store.subscribe(throttle(() => {
+  saveState(store.getState());
+}, 1000)); */
 
 export default store;

@@ -58,6 +58,7 @@ class ProfileForm extends Form {
 		if (!match.params.id) {
 			createProfile(data);
 			toast("Awesome! your profile has been Created.");
+			history.push(`/user/dashboard`);
 			//history.push(`/user/profile/${auth.user.id}`);
 		} else {
 			editProfile(data, match.params.id);
@@ -73,9 +74,7 @@ class ProfileForm extends Form {
 			return <Redirect to='/user/dashboard' />;
 		}
 
-		return this.props.loading ? (
-			<PreLoader />
-		) : (
+		return (
 			<Fragment>
 				<div className='container'>
 					<form

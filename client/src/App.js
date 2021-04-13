@@ -19,15 +19,11 @@ function App() {
 			</header>
 			<main style={{ minHeight: "900px" }}>
 				<Switch>
-					<Route exact path='/user/signup' component={Signup} />
-					<Route exact path='/user/signin' component={Signin} />
-					<Route exact path='/user/create-profile' component={ProfileForm} />
-					<Route exact path='/user/dashboard' component={Dashboard} />
-					<Route
-						exact
-						path='/user/profile/experience'
-						component={ExperienceForm}
-					/>
+					<Route path='/user/signup' component={Signup} />
+					<Route path='/user/signin' component={Signin} />
+					<Route path='/user/create-profile' component={ProfileForm} />
+					<Route path='/user/dashboard' component={Dashboard} />
+					<Route path='/user/profile/experience' component={ExperienceForm} />
 				</Switch>
 			</main>
 			<footer></footer>

@@ -25,7 +25,9 @@ router.post("/", auth, async (req, res) => {
 		description: req.body.description,
 	});
 
-	newExp = await newExp.save();
+	newExp = await newExp.save((err) => {
+		if (err) return console.error(err);
+	});
 	return res.status(201).json(newExp);
 });
 

@@ -182,6 +182,6 @@ class AddExperience extends Form {
 }
 
 const mapStateToProps = (state) => ({
-	loading: state.experience.loading,
+	loading: state.experiences.loading,
 });
 export default connect(mapStateToProps, { addExperience })(AddExperience);

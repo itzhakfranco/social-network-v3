@@ -7,6 +7,8 @@ import {
 	FETCH_EXPERIENCE_BY_ID_SUCCESS,
 	UPDATE_EXPERIENCE_REQUEST,
 	UPDATE_EXPERIENCE_SUCCESS,
+	DELETE_EXPERIENCE_REQUEST,
+	DELETE_EXPERIENCE_SUCCESS,
 } from "./experienceType";
 
 const intialState = {
@@ -61,6 +63,20 @@ const experienceReducer = (state = intialState, action) => {
 				experience: action.payload,
 				loading: false,
 			};
+		case DELETE_EXPERIENCE_SUCCESS:
+			return {
+				...state,
+				experiences: state.experiences.filter(
+					(experience) => experience._id !== action.payload
+				),
+				loading: false,
+			};
+		case DELETE_EXPERIENCE_REQUEST:
+			return {
+				...state,
+				loading: true,
+			};
+
 		default:
 			return state;
 	}

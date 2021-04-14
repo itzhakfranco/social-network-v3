@@ -11,6 +11,8 @@ import {
 	FETCH_EXPERIENCE_BY_ID_SUCCESS,
 	UPDATE_EXPERIENCE_REQUEST,
 	UPDATE_EXPERIENCE_SUCCESS,
+	DELETE_EXPERIENCE_REQUEST,
+	DELETE_EXPERIENCE_SUCCESS,
 } from "./experienceType";
 
 export const addExperience = (formData) => async (dispatch) => {
@@ -70,5 +72,18 @@ export const updateExperience = (experienceId, updatedExperience) => async (
 	dispatch({
 		type: UPDATE_EXPERIENCE_SUCCESS,
 		payload: data,
+	});
+};
+
+export const deleteExperience = (experienceId) => async (dispatch) => {
+	dispatch({
+		type: DELETE_EXPERIENCE_REQUEST,
+	});
+
+	await http.delete(`${apiUrl}/profile/experience/${experienceId}`);
+
+	dispatch({
+		type: DELETE_EXPERIENCE_SUCCESS,
+		payload: experienceId,
 	});
 };

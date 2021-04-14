@@ -80,17 +80,16 @@ router.put("/edit/:id", auth, async (req, res) => {
 	res.send(updatedExperience);
 });
 
-router.delete("/experience/:exp_id", auth, async (req, res) => {
-	const profile = await Profile.findOne({ user: req.user.id });
+router.delete("/:id", auth, async (req, res) => {
+	const experience = await Experience.findOneAndRemove({
+		_id: req.params.id,
+		user_id: req.user.id,
+	});
 
-	const removeIndex = profile.experience
-		.map((item) => item.id)
-		.indexOf(req.params.exp_id);
+	if (!experience)
+		res.status(400).send("The experience with the given ID was not found.");
 
-	profile.experience.splice(removeIndex, 1);
-
-	await profile.save();
-	res.json(profile);
+	res.json(experience);
 });
 
 module.exports = router;

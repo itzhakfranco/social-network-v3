@@ -65,7 +65,7 @@ class ExperienceForm extends Form {
 
 	doSubmit = () => {
 		const { data } = this.state;
-		const { addExperience, match, history } = this.props;
+		const { addExperience, updateExperience, match, history } = this.props;
 
 		if (!match.params.id) {
 			addExperience(data);

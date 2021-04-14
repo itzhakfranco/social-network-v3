@@ -1,6 +1,5 @@
 import http from "../../services/httpService";
 import { apiUrl } from "../../config.json";
-import axios from "axios";
 
 import {
 	CREATE_EXPERIENCE_REQUEST,
@@ -26,13 +25,11 @@ export const addExperience = (formData) => async (dispatch) => {
 	});
 };
 
-export const fetchUserExperiences = () => async (dispatch, getState) => {
+export const fetchUserExperiences = () => async (dispatch) => {
 	dispatch({
 		type: FETCH_USER_EXPERIENCES_REQUEST,
 	});
-
-	axios.defaults.headers.common["x-auth-token"] = getState().user.token;
-	const { data } = await http.get(`${apiUrl}/profile/experience`);
+	const { data } = await http.get("/profile/experience");
 
 	dispatch({
 		type: FETCH_USER_EXPERIENCES_SUCCESS,

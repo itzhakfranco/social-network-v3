@@ -1,12 +1,11 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-function getToken() {
-	return localStorage.getItem("token");
-}
+const token = localStorage.getItem("token");
+axios.defaults.baseURL = "http://localhost:7777/api";
+axios.defaults.headers.common["x-auth-token"] = token;
 
-axios.defaults.headers.common["x-auth-token"] = getToken();
-
+console.log("fsss");
 axios.interceptors.response.use(null, (error) => {
 	const expectedError = error.response && error.response.status >= 403;
 	if (expectedError) toast.error("An unexpected error occurred");

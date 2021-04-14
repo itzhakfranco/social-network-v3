@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const auth = require("../middleware/auth");
-const { Profile } = require("../models/Profile");
+const { Profile, validateProfile } = require("../models/Profile");
 const User = require("../models/User");
 
 router.post("/", auth, async (req, res) => {
@@ -23,8 +23,8 @@ router.post("/", auth, async (req, res) => {
 		image: req.body.image && req.body.image,
 	});
 
-	await profile.save();
-	res.json(profile);
+	profile = await profile.save();
+	res.json({ profile, hasProfile: true, profile_id: profile._id });
 });
 
 router.put("/:id", auth, async (req, res) => {
@@ -46,21 +46,16 @@ router.put("/:id", auth, async (req, res) => {
 		status,
 	};
 
-	try {
-		let profile = await Profile.findOneAndUpdate(
-			{ _id: req.params.id },
-			{ $set: profileFields },
-			{ new: true }
-		);
+	let profile = await Profile.findOneAndUpdate(
+		{ _id: req.params.id },
+		{ $set: profileFields },
+		{ new: true }
+	);
 
-		return res.json(profile);
-	} catch (err) {
-		console.error(err.message);
-		return res.status(500).send("Server Error");
-	}
+	res.json(profile);
 });
 
-router.get("/:id", auth, async (req, res) => {
+/* router.get("/:id", auth, async (req, res) => {
 	const user = await User.findOne({ email });
 
 	const card = await Profile.findOne({
@@ -70,7 +65,7 @@ router.get("/:id", auth, async (req, res) => {
 	if (!card)
 		return res.status(404).send("The card with the given ID was not found.");
 	res.send(card);
-});
+}); */
 
 /* router.get("/", async (req, res) => {
 	try {

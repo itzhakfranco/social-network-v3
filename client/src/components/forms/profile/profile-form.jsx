@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Form from "../../common/form";
 import { Redirect } from "react-router-dom";
 import Joi from "joi-browser";
@@ -75,7 +75,7 @@ class ProfileForm extends Form {
 		}
 
 		return (
-			<Fragment>
+			<>
 				<div className='container'>
 					<form
 						onSubmit={this.handleSubmit}
@@ -168,7 +168,7 @@ class ProfileForm extends Form {
 						</div>
 					</form>
 				</div>
-			</Fragment>
+			</>
 		);
 	}
 }

@@ -7,6 +7,8 @@ import {
 	LOGOUT,
 } from "./userTypes";
 
+import axios from "axios";
+
 const intialState = {
 	token: null,
 	user_id: "",
@@ -38,6 +40,7 @@ const userReducer = (state = intialState, action) => {
 			};
 		case LOGIN_SUCCESS:
 			localStorage.setItem("token", payload.token);
+			axios.defaults.headers["x-auth-token"] = payload.token;
 
 			return {
 				token: payload.token,

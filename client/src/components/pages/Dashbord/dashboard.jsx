@@ -1,8 +1,12 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+
+import { fetchUserExperiences } from "../../../store/experience/experienceActions";
+
 import PageHeader from "../../common/page-header";
 import ExperienceTable from "./experience-table";
-import { fetchUserExperiences } from "../../../store/experience/experienceActions";
+import RenderButton from "../../common/render-button";
+
 import PreLoader from "../../../utils/pre-loader";
 
 const Dashboard = ({ name, loading, experiences, fetchUserExperiences }) => {
@@ -21,6 +25,11 @@ const Dashboard = ({ name, loading, experiences, fetchUserExperiences }) => {
 					/>
 				</div>
 			</div>
+			{experiences?.length == 0 && (
+				<RenderButton to={"/user/create-experience"}>
+					Add Experience
+				</RenderButton>
+			)}
 			{experiences?.length > 0 && <ExperienceTable experiences={experiences} />}
 		</div>
 	);

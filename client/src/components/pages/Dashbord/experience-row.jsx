@@ -8,9 +8,22 @@ import { connect } from "react-redux";
 
 import { deleteExperience } from "../../../store/experience/experienceActions";
 
+import { toast } from "react-toastify";
+import { swalConfirmDelete } from "../../../config.json";
+import Swal from "sweetalert2";
+
 class ExperienceRow extends Component {
+	handleDelete = async (experienceId) => {
+		const result = await Swal.fire(swalConfirmDelete);
+		if (result.value) {
+			toast("Experience was deleted successfully");
+			this.props.deleteExperience(experienceId);
+		}
+	};
+
 	render() {
-		const { experiences, deleteExperience } = this.props;
+		const { experiences } = this.props;
+
 		return experiences.map((exp, index) => (
 			<tr key={index}>
 				<th scope='row'>{++index}</th>
@@ -33,7 +46,7 @@ class ExperienceRow extends Component {
 					</Link>
 					<button
 						onClick={() => {
-							deleteExperience(exp._id);
+							this.handleDelete(exp._id);
 						}}
 						className='btn btn-danger'
 					>

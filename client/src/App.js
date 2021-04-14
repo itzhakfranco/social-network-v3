@@ -9,13 +9,14 @@ import Dashboard from "./components/pages/Dashbord/dashboard";
 import ExperienceForm from "./components/forms/profile/experience-form";
 import ProfileForm from "./components/forms/profile/profile-form";
 
-import Routes from "./routing/routes";
+import { ToastContainer } from "react-toastify";
 
 function App() {
 	return (
 		<>
 			<header>
 				<Navbar />
+				<ToastContainer />
 			</header>
 			<main style={{ minHeight: "900px" }}>
 				<Switch>
@@ -27,7 +28,10 @@ function App() {
 						path='/user/experience/edit/:id'
 						component={ExperienceForm}
 					/>
-					<ProtectedRoute path='/user/experience' component={ExperienceForm} />
+					<ProtectedRoute
+						path='/user/create-experience'
+						component={ExperienceForm}
+					/>
 				</Switch>
 			</main>
 			<footer></footer>

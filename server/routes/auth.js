@@ -20,7 +20,12 @@ router.post("/", async (req, res) => {
 	const profile = await Profile.find({ user_id: user._id });
 	const hasProfile = profile.length > 0 ? true : false;
 
-	res.json({ token: user.generateAuthToken(), hasProfile, name: user.name });
+	res.json({
+		token: user.generateAuthToken(),
+		hasProfile,
+		name: user.name,
+		user_id: user._id,
+	});
 });
 
 function validate(req) {

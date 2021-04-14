@@ -2,12 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const auth = require("../middleware/auth");
-const {
-	Profile,
-	validateEducation,
-	validateExperience,
-	validateProfile,
-} = require("../models/Profile");
+const { Profile } = require("../models/Profile");
+const User = require("../models/User");
 
 router.post("/", auth, async (req, res) => {
 	const { errors } = validateProfile(req.body);
@@ -64,7 +60,19 @@ router.put("/:id", auth, async (req, res) => {
 	}
 });
 
-router.get("/", async (req, res) => {
+router.get("/:id", auth, async (req, res) => {
+	const user = await User.findOne({ email });
+
+	const card = await Profile.findOne({
+		_id: req.params.id,
+		user_id: req.user.id,
+	});
+	if (!card)
+		return res.status(404).send("The card with the given ID was not found.");
+	res.send(card);
+});
+
+/* router.get("/", async (req, res) => {
 	try {
 		const profiles = await Profile.find();
 		res.json(profiles);
@@ -95,7 +103,7 @@ router.get("/user/:user_id", async (req, res) => {
 		console.error(err.message);
 		res.status(500).send("Server Error");
 	}
-});
+}); */
 
 //must add id as param. Profile.findOneAndRemove({_id:req.params.id, user_id:req.user._id})
 //delete try/catch. if (!profile) return res.status(404).send('The Profile with the given ID not found')

@@ -5,14 +5,20 @@ import { fetchUserExperiences } from "../../../store/experience/experienceAction
 
 import PageHeader from "../../common/page-header";
 import ExperienceTable from "./experience-table";
-import RenderButton from "../../common/render-button";
+import LinkButton from "../../common/link-button";
 
 import PreLoader from "../../../utils/pre-loader";
 
-const Dashboard = ({ name, loading, experiences, fetchUserExperiences }) => {
+const Dashboard = ({
+	name,
+	loading,
+	experiences,
+	fetchUserExperiences,
+	hasProfile,
+}) => {
 	useEffect(() => {
-		fetchUserExperiences();
-	}, []);
+		hasProfile && fetchUserExperiences();
+	}, [hasProfile]);
 	return loading ? (
 		<PreLoader />
 	) : (
@@ -25,10 +31,11 @@ const Dashboard = ({ name, loading, experiences, fetchUserExperiences }) => {
 					/>
 				</div>
 			</div>
-			{experiences?.length == 0 && (
-				<RenderButton to={"/user/create-experience"}>
-					Add Experience
-				</RenderButton>
+			{!hasProfile && (
+				<LinkButton to='create-profile'>Create Profile</LinkButton>
+			)}
+			{hasProfile && experiences?.length == 0 && (
+				<LinkButton to={"/user/create-experience"}>Add Experience</LinkButton>
 			)}
 			{experiences?.length > 0 && <ExperienceTable experiences={experiences} />}
 		</div>
@@ -36,6 +43,7 @@ const Dashboard = ({ name, loading, experiences, fetchUserExperiences }) => {
 };
 const mapStateToProps = (state) => ({
 	name: state.user.name,
+	hasProfile: state.user.hasProfile,
 	experiences: state.experiences.experiences,
 	loading: state.experiences.loading,
 });

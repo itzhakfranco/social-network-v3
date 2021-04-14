@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const renderButton = ({ children, ...rest }) => {
+const LinkButton = ({ children, ...rest }) => {
 	return (
 		<Link {...rest} className='btn btn-info m-4'>
 			{children}
@@ -8,4 +8,4 @@ const renderButton = ({ children, ...rest }) => {
 	);
 };
 
-export default renderButton;
+export default LinkButton;

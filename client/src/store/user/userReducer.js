@@ -9,6 +9,7 @@ import {
 
 const intialState = {
 	token: null,
+	user_id: "",
 	hasProfile: false,
 	name: "",
 	loading: false,
@@ -40,6 +41,7 @@ const userReducer = (state = intialState, action) => {
 
 			return {
 				token: payload.token,
+				user_id: payload.user_id,
 				hasProfile: payload.hasProfile,
 				name: payload.name,
 				loading: false,

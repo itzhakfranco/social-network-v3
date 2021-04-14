@@ -7,7 +7,7 @@ import { logout } from "../../../store/user/userActions";
 import GuestLinks from "./guest-links";
 import MembersLinks from "./member-links";
 
-const Navbar = ({ token, hasProfile, name, logout }) => {
+const Navbar = ({ token, user_id, hasProfile, name, logout }) => {
 	return (
 		<nav className='navbar navbar-expand-lg navbar-light shadow-sm'>
 			<div className='container'>
@@ -27,6 +27,7 @@ const Navbar = ({ token, hasProfile, name, logout }) => {
 					<>
 						{token && (
 							<MembersLinks
+								user_id={user_id}
 								hasProfile={hasProfile}
 								name={name}
 								logout={logout}
@@ -43,6 +44,7 @@ const Navbar = ({ token, hasProfile, name, logout }) => {
 const mapStateToProps = (state) => ({
 	token: state.user.token,
 	hasProfile: state.user.hasProfile,
+	user_id: state.user.user_id,
 	name: state.user.name,
 });
 

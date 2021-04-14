@@ -19,7 +19,7 @@ const profileReducer = (state = intialState, action) => {
 			};
 		case CREATE_PROFILE_SUCCESS:
 			return {
-				profile: action.payload.profile,
+				profile: action.payload,
 				loading: false,
 			};
 		case FETCH_PROFILE_REQUEST:

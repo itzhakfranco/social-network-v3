@@ -3,8 +3,8 @@ const router = express.Router();
 
 const auth = require("../middleware/auth");
 const { Profile, validateProfile } = require("../models/Profile");
-const User = require("../models/User");
 
+//Add new profile
 router.post("/", auth, async (req, res) => {
 	const { errors } = validateProfile(req.body);
 	if (errors) return res.status(400).send(errors.details[0].message);
@@ -27,6 +27,7 @@ router.post("/", auth, async (req, res) => {
 	res.json(profile);
 });
 
+//Update profile
 router.put("/:id", auth, async (req, res) => {
 	const { error } = validateProfile(req.body);
 	if (error) return res.status(400).send(error.details[0].message);
@@ -55,17 +56,16 @@ router.put("/:id", auth, async (req, res) => {
 	res.json(profile);
 });
 
-/* router.get("/:id", auth, async (req, res) => {
-	const user = await User.findOne({ email });
-
-	const card = await Profile.findOne({
-		_id: req.params.id,
+//Fetch profile by id
+router.get("/view/:id", auth, async (req, res) => {
+	const profile = await Profile.findOne({
 		user_id: req.user.id,
-	});
-	if (!card)
-		return res.status(404).send("The card with the given ID was not found.");
-	res.send(card);
-}); */
+		_id: req.params.id,
+	}).select(["-_id", "-__v"]);
+
+	if (!profile) return res.status(404).send("Invalid Profile Id");
+	res.send(profile);
+});
 
 /* router.get("/", async (req, res) => {
 	try {

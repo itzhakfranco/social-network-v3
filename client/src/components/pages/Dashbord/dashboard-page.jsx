@@ -18,7 +18,7 @@ const Dashboard = ({
 }) => {
 	useEffect(() => {
 		profile_id && fetchUserExperiences();
-	}, [profile_id]);
+	}, [profile_id, fetchUserExperiences]);
 	return loading ? (
 		<PreLoader />
 	) : (

@@ -4,10 +4,11 @@ import { Route, Switch } from "react-router-dom";
 import ProtectedRoute from "./components/common/protectedRoute";
 import Signin from "./components/forms/auth/signin";
 import Signup from "./components/forms/auth/signup";
-import Dashboard from "./components/pages/Dashbord/dashboard";
+import Dashboard from "./components/pages/Dashbord/dashboard-page";
 
 import ExperienceForm from "./components/forms/profile/experience-form";
 import ProfileForm from "./components/forms/profile/profile-form";
+import ProfilePage from "./components/pages/Profile/profile-page";
 
 import { ToastContainer } from "react-toastify";
 
@@ -22,7 +23,11 @@ function App() {
 				<Switch>
 					<Route path='/user/signup' component={Signup} />
 					<Route path='/user/signin' component={Signin} />
-					<ProtectedRoute path='/user/profile/:id' component={ProfileForm} />
+					<ProtectedRoute
+						exact
+						path='/user/profile/:id'
+						component={ProfilePage}
+					/>
 					<ProtectedRoute path='/user/dashboard' component={Dashboard} />
 					<ProtectedRoute path='/user/create-profile' component={ProfileForm} />
 					<ProtectedRoute

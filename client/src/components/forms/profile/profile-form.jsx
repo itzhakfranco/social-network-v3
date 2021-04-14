@@ -24,9 +24,7 @@ class ProfileForm extends Form {
 
 	async componentDidMount() {
 		const { match, profile } = this.props;
-		if (match.params.id && match.params.id === profile._id) {
-			this.setState({ data: this.mapToView(profile) });
-		}
+		match.params?.id && this.setState({ data: this.mapToView(profile) });
 	}
 
 	schema = {
@@ -175,6 +173,7 @@ class ProfileForm extends Form {
 
 const mapStateToProps = (state) => ({
 	loading: state.profile.loading,
+	profile: state.profile.profile,
 });
 
 export default connect(mapStateToProps, {

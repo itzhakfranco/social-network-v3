@@ -62,7 +62,7 @@ function validateProfile(user) {
 		status: Joi.string().required().required(),
 		skills: Joi.string().min(1).max(255).required(),
 		bio: Joi.string().min(2).max(500).required(),
-		image: Joi.string().min(11).max(1024),
+		image: Joi.string().min(11).max(1024).allow(""),
 	});
 
 	return schema.validate(user);

@@ -24,7 +24,7 @@ router.post("/", auth, async (req, res) => {
 	});
 
 	profile = await profile.save();
-	res.json({ profile, hasProfile: true, profile_id: profile._id });
+	res.json(profile);
 });
 
 router.put("/:id", auth, async (req, res) => {

@@ -18,13 +18,12 @@ router.post("/", async (req, res) => {
 	if (!validPassword) return res.status(400).send("Invalid email or password.");
 
 	const profile = await Profile.find({ user_id: user._id });
-	const hasProfile = profile.length > 0 ? true : false;
+	const profile_id = profile.length > 0 ? profile[0]._id : null;
 
 	res.json({
 		token: user.generateAuthToken(),
-		hasProfile,
+		profile_id,
 		name: user.name,
-		user_id: user._id,
 	});
 });
 

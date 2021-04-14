@@ -11,9 +11,8 @@ import axios from "axios";
 
 const intialState = {
 	token: null,
-	user_id: "",
-	hasProfile: false,
 	name: "",
+	profile_id: null,
 	loading: false,
 };
 
@@ -44,8 +43,7 @@ const userReducer = (state = intialState, action) => {
 
 			return {
 				token: payload.token,
-				user_id: payload.user_id,
-				hasProfile: payload.hasProfile,
+				profile_id: payload.profile_id,
 				name: payload.name,
 				loading: false,
 			};
@@ -54,7 +52,7 @@ const userReducer = (state = intialState, action) => {
 			localStorage.removeItem("token");
 			return {
 				token: null,
-				hasProfile: false,
+
 				name: "",
 				loading: false,
 			};

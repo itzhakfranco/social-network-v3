@@ -5,8 +5,10 @@ import Joi from "joi-browser";
 import { statusOptions } from "../../../config.json";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
-import { createProfile } from "../../../store/profile/profileActions";
-import PreLoader from "../../../utils/pre-loader";
+import {
+	createProfile,
+	updateProfile,
+} from "../../../store/profile/profileActions";
 
 class ProfileForm extends Form {
 	state = {
@@ -49,19 +51,24 @@ class ProfileForm extends Form {
 		};
 	}
 
-	doSubmit = () => {
-		const { createProfile, editProfile, history, match, auth } = this.props;
+	doSubmit = async () => {
+		const {
+			createProfile,
+			updateProfile,
+			history,
+			match,
+			profile,
+		} = this.props;
 
 		const { data } = this.state;
 		if (!match.params.id) {
-			createProfile(data);
+			await createProfile(data);
 			toast("Awesome! your profile has been Created.");
-			history.push(`/user/dashboard`);
-			//history.push(`/user/profile/${auth.user.id}`);
+			history.push("/user/dashboard");
 		} else {
-			editProfile(data, match.params.id);
+			updateProfile(data, match.params.id);
 			toast("Awesome! your profile has been Updated.");
-			history.replace(`/user/profile/${auth.user.id}`);
+			history.push("/user/dashboard");
 		}
 	};
 
@@ -72,9 +79,7 @@ class ProfileForm extends Form {
 			return <Redirect to='/user/dashboard' />;
 		} */
 
-		return this.propsloading ? (
-			<PreLoader />
-		) : (
+		return (
 			<div className='container'>
 				<form
 					onSubmit={this.handleSubmit}
@@ -170,10 +175,10 @@ class ProfileForm extends Form {
 }
 
 const mapStateToProps = (state) => ({
-	loading: state.profile.loading,
 	profile: state.profile.profile,
 });
 
 export default connect(mapStateToProps, {
 	createProfile,
+	updateProfile,
 })(ProfileForm);

@@ -3,21 +3,20 @@ import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import { swalConfirmDelete } from "../../../config.json";
 import Swal from "sweetalert2";
-//import { deleteProfile } from "../../actions/profile";
+import { deleteProfile } from "../../../store/profile/profileActions";
 import { toast } from "react-toastify";
 
 class ProfileActions extends Component {
-	onDelete = async (id) => {
-		console.log(id);
-		/* 	const result = await Swal.fire(swalConfirmDelete);
-		if (result.value) this.handleDelete(); */
+	onDelete = async (profileId) => {
+		const result = await Swal.fire(swalConfirmDelete);
+		if (result.value) this.handleDelete(profileId);
 	};
 
-	/* 	async handleDelete() {
-		await this.props.deleteProfile();
-		this.props.history.replace("/posts");
+	async handleDelete(profileId) {
+		await this.props.deleteProfile(profileId);
+		this.props.history.replace("/user/dashboard");
 		toast.success("Profile was delete successfully");
-	}  */
+	}
 	render() {
 		const { profile, user_id } = this.props;
 		return (
@@ -54,4 +53,6 @@ const mapStateToProps = (state) => ({
 	user_id: state.user.user_id,
 	profile: state.profile.profile,
 });
-export default connect(mapStateToProps, {})(withRouter(ProfileActions));
+export default connect(mapStateToProps, { deleteProfile })(
+	withRouter(ProfileActions)
+);

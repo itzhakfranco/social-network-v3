@@ -3,6 +3,10 @@ import {
 	CREATE_PROFILE_SUCCESS,
 	FETCH_PROFILE_REQUEST,
 	FETCH_PROFILE_SUCCESS,
+	UPDATE_PROFILE_REQUEST,
+	UPDATE_PROFILE_SUCCESS,
+	DELETE_PROFILE_REQUEST,
+	DELETE_PROFILE_SUCCESS,
 } from "./profileType";
 
 const intialState = {
@@ -19,6 +23,7 @@ const profileReducer = (state = intialState, action) => {
 			};
 		case CREATE_PROFILE_SUCCESS:
 			return {
+				...state,
 				profile: action.payload,
 				loading: false,
 			};
@@ -33,6 +38,30 @@ const profileReducer = (state = intialState, action) => {
 				profile: action.payload,
 				loading: false,
 			};
+		case UPDATE_PROFILE_REQUEST:
+			return {
+				...state,
+				loading: true,
+			};
+		case UPDATE_PROFILE_SUCCESS:
+			return {
+				...state,
+				profile: action.payload,
+				loading: true,
+			};
+
+		case DELETE_PROFILE_REQUEST:
+			return {
+				...state,
+				loading: true,
+			};
+		case DELETE_PROFILE_SUCCESS:
+			return {
+				...state,
+				profile: null,
+				loading: true,
+			};
+
 		default:
 			return state;
 	}

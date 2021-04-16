@@ -27,7 +27,7 @@ router.post("/", auth, async (req, res) => {
 	res.json(profile);
 });
 
-//Update profile
+//Update Profile
 router.put("/:id", auth, async (req, res) => {
 	const { error } = validateProfile(req.body);
 	if (error) return res.status(400).send(error.details[0].message);
@@ -48,15 +48,16 @@ router.put("/:id", auth, async (req, res) => {
 	};
 
 	let profile = await Profile.findOneAndUpdate(
-		{ _id: req.params.id },
+		{ _id: req.params.id, user_id: req.user.id },
 		{ $set: profileFields },
 		{ new: true }
 	);
+	if (!profile) return res.status(404).send("Invalid credentials");
 
 	res.json(profile);
 });
 
-//Fetch profile by id
+//Fetch Profile
 router.get("/view/:id", auth, async (req, res) => {
 	const profile = await Profile.findOne({
 		user_id: req.user.id,
@@ -64,6 +65,16 @@ router.get("/view/:id", auth, async (req, res) => {
 	});
 
 	if (!profile) return res.status(404).send("Invalid Profile Id");
+	res.send(profile);
+});
+
+//Delete Profile
+router.delete("/:id", auth, async (req, res) => {
+	const profile = await Profile.findOneAndRemove({
+		_id: req.params.id,
+		user_id: req.user.id,
+	});
+	if (!profile) return res.status(404).send("Invalid Credentials");
 	res.send(profile);
 });
 
@@ -102,16 +113,6 @@ router.get("/user/:user_id", async (req, res) => {
 
 //must add id as param. Profile.findOneAndRemove({_id:req.params.id, user_id:req.user._id})
 //delete try/catch. if (!profile) return res.status(404).send('The Profile with the given ID not found')
-
-router.delete("/", auth, async (req, res) => {
-	try {
-		await Profile.findOneAndRemove({ user: req.user.id });
-		return res.json({});
-	} catch (err) {
-		console.error(err.message);
-		return res.status(500).send("Server Error");
-	}
-});
 
 router.post("/education", auth, async (req, res) => {
 	const { error } = validateEducation(req.body);

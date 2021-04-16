@@ -66,11 +66,11 @@ class ProfileForm extends Form {
 	};
 
 	render() {
-		//if user has profile, redirect to Dashboard
+		/* 	//if user has profile, redirect to Dashboard
 		const { profile, match } = this.props;
 		if (profile && Object.keys(profile).length > 0 && !match.params.id) {
 			return <Redirect to='/user/dashboard' />;
-		}
+		} */
 
 		return (
 			<>

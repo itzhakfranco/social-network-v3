@@ -31,10 +31,11 @@ const Dashboard = ({
 					/>
 				</div>
 			</div>
+
 			{!profile_id && (
-				<LinkButton to='create-profile'>Create Profile</LinkButton>
+				<LinkButton to='/user/create-profile'>Create Profile</LinkButton>
 			)}
-			{profile_id && experiences?.length == 0 && (
+			{profile_id && experiences?.length === 0 && (
 				<LinkButton to={"/user/create-experience"}>Add Experience</LinkButton>
 			)}
 			{experiences?.length > 0 && <ExperienceTable experiences={experiences} />}

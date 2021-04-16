@@ -37,7 +37,9 @@ router.get("/", auth, async (req, res) => {
 		user_id: req.user.id,
 	});
 
+	if (!profile) return res.status(403).send("No profile found");
 	const experiences = await Experience.find({ profile_id: profile._id });
+
 	res.status(200).json(experiences);
 });
 
@@ -87,7 +89,9 @@ router.delete("/:id", auth, async (req, res) => {
 	});
 
 	if (!experience)
-		res.status(400).send("The experience with the given ID was not found.");
+		return res
+			.status(400)
+			.send("The experience with the given ID was not found.");
 
 	res.json(experience);
 });

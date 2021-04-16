@@ -41,17 +41,6 @@ const MemberLinks = ({ profile_id, name, logout }) => (
 				</li>
 			)}
 
-			{!profile_id && (
-				<li className='nav-item '>
-					<NavLink
-						className='nav-link btn btn-secondary text-white mr-4'
-						to={"/user/create-profile"}
-					>
-						<i className='far fa-user mx-1'></i> Create Profile
-					</NavLink>
-				</li>
-			)}
-
 			<li className='nav-item'>
 				<NavLink
 					onClick={() => {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { logout } from "../../../store/user/userActions";
@@ -7,7 +7,7 @@ import { logout } from "../../../store/user/userActions";
 import GuestLinks from "./guest-links";
 import MembersLinks from "./member-links";
 
-const Navbar = ({ token, profile_id, hasProfile, profile, name, logout }) => {
+const Navbar = ({ token, name, profile_id, logout }) => {
 	return (
 		<nav className='navbar navbar-expand-lg navbar-light shadow-sm'>
 			<div className='container'>
@@ -42,8 +42,6 @@ const Navbar = ({ token, profile_id, hasProfile, profile, name, logout }) => {
 
 const mapStateToProps = (state) => ({
 	token: state.user.token,
-	hasProfile: state.user.hasProfile,
-	user_id: state.user.user_id,
 	name: state.user.name,
 	profile_id: state.user.profile_id,
 });

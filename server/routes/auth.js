@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
-const { Profile } = require("../models/Profile");
 const bcrypt = require("bcryptjs");
 const Joi = require("@hapi/joi");
 
@@ -17,12 +16,9 @@ router.post("/", async (req, res) => {
 	const validPassword = await bcrypt.compare(password, user.password);
 	if (!validPassword) return res.status(400).send("Invalid email or password.");
 
-	const profile = await Profile.find({ user_id: user._id });
-	const profile_id = profile.length > 0 ? profile[0]._id : null;
-
 	res.json({
 		token: user.generateAuthToken(),
-		profile_id,
+		user_id: user._id,
 		name: user.name,
 	});
 });

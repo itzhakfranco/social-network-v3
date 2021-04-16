@@ -72,101 +72,99 @@ class ProfileForm extends Form {
 			return <Redirect to='/user/dashboard' />;
 		} */
 
-		return (
-			<>
-				<div className='container'>
-					<form
-						onSubmit={this.handleSubmit}
-						action=''
-						method='POST'
-						className='mt-4'
-						autoComplete='off'
-					>
-						<div className='row'>
-							<div className='col-lg-6 m-auto'>
-								{this.renderInput(
-									"company",
-									"Company",
-									"text",
-									"Your own company or one you work for",
-									true,
-									"far fa-building"
-								)}
-							</div>
+		return this.propsloading ? (
+			<PreLoader />
+		) : (
+			<div className='container'>
+				<form
+					onSubmit={this.handleSubmit}
+					action=''
+					method='POST'
+					className='mt-4'
+					autoComplete='off'
+				>
+					<div className='row'>
+						<div className='col-lg-6 m-auto'>
+							{this.renderInput(
+								"company",
+								"Company",
+								"text",
+								"Your own company or one you work for",
+								true,
+								"far fa-building"
+							)}
 						</div>
-						<div className='row'>
-							<div className='col-lg-6 m-auto'>
-								{this.renderInput(
-									"website",
-									"Website",
-									"text",
-									"your own or a Company website",
-									true
-								)}
-							</div>
+					</div>
+					<div className='row'>
+						<div className='col-lg-6 m-auto'>
+							{this.renderInput(
+								"website",
+								"Website",
+								"text",
+								"your own or a Company website",
+								true
+							)}
 						</div>
-						<div className='row'>
-							<div className='col-lg-6 m-auto'>
-								{this.renderInput(
-									"image",
-									"Profile Image",
-									"text",
-									"Profile Image",
-									true
-								)}
-							</div>
+					</div>
+					<div className='row'>
+						<div className='col-lg-6 m-auto'>
+							{this.renderInput(
+								"image",
+								"Profile Image",
+								"text",
+								"Profile Image",
+								true
+							)}
 						</div>
-						<div className='row'>
-							<div className='col-lg-6 m-auto'>
-								{this.renderSelect(statusOptions, "status", "Status")}
-							</div>
+					</div>
+					<div className='row'>
+						<div className='col-lg-6 m-auto'>
+							{this.renderSelect(statusOptions, "status", "Status")}
 						</div>
-						<div className='row'>
-							<div className='col-lg-6 m-auto'>
-								{this.renderInput(
-									"skills",
-									"Use comma separated values (e.g HTML,CSS,JavaScript,PHP)",
-									"text",
-									"skills",
-									true,
-									"fas fa-code"
-								)}
-							</div>
+					</div>
+					<div className='row'>
+						<div className='col-lg-6 m-auto'>
+							{this.renderInput(
+								"skills",
+								"Use comma separated values (e.g HTML,CSS,JavaScript,PHP)",
+								"text",
+								"skills",
+								true,
+								"fas fa-code"
+							)}
 						</div>
-						<div className='row'>
-							<div className='col-lg-6 m-auto'>
-								{this.renderTextArea("bio", "Bio", "Placeholder")}
-							</div>
+					</div>
+					<div className='row'>
+						<div className='col-lg-6 m-auto'>
+							{this.renderTextArea("bio", "Bio", "Placeholder")}
 						</div>
-						<div className='row'>
-							<div className='col-lg-6 m-auto'>
-								{this.renderInput(
-									"location",
-									"Location",
-									"text",
-									"City & state suggested (eg. Boston, MA)",
-									true,
-									"fas fa-map-marker-alt"
-								)}
-							</div>
+					</div>
+					<div className='row'>
+						<div className='col-lg-6 m-auto'>
+							{this.renderInput(
+								"location",
+								"Location",
+								"text",
+								"City & state suggested (eg. Boston, MA)",
+								true,
+								"fas fa-map-marker-alt"
+							)}
 						</div>
-						<div className='row'>
-							<div className='col-lg-6 m-auto'>
-								{this.renderButton(
-									this.props.match.params.id
-										? "Update Profile"
-										: "Create Profile"
-								)}
-								{this.renderLinkButton(
-									"Cancel",
-									"/user/dashboard",
-									"btn btn-dark ml-4"
-								)}
-							</div>
+					</div>
+					<div className='row'>
+						<div className='col-lg-6 m-auto'>
+							{this.renderButton(
+								this.props.match.params.id ? "Update Profile" : "Create Profile"
+							)}
+							{this.renderLinkButton(
+								"Cancel",
+								"/user/dashboard",
+								"btn btn-dark ml-4"
+							)}
 						</div>
-					</form>
-				</div>
-			</>
+					</div>
+				</form>
+			</div>
 		);
 	}
 }

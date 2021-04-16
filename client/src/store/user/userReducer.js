@@ -11,8 +11,8 @@ import axios from "axios";
 
 const intialState = {
 	token: null,
+	user_id: null,
 	name: "",
-	profile_id: null,
 	loading: false,
 };
 
@@ -28,6 +28,7 @@ const userReducer = (state = intialState, action) => {
 			localStorage.setItem("token", payload.token);
 
 			return {
+				...state,
 				loading: false,
 				token: payload.token,
 				name: payload.name,
@@ -43,7 +44,7 @@ const userReducer = (state = intialState, action) => {
 
 			return {
 				token: payload.token,
-				profile_id: payload.profile_id,
+				user_id: payload.user_id,
 				name: payload.name,
 				loading: false,
 			};

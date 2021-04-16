@@ -61,7 +61,7 @@ router.get("/view/:id", auth, async (req, res) => {
 	const profile = await Profile.findOne({
 		user_id: req.user.id,
 		_id: req.params.id,
-	}).select(["-_id", "-__v"]);
+	});
 
 	if (!profile) return res.status(404).send("Invalid Profile Id");
 	res.send(profile);

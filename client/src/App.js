@@ -38,6 +38,11 @@ function App() {
 						path='/user/create-experience'
 						component={ExperienceForm}
 					/>
+					<ProtectedRoute
+						exact
+						path='/user/profile/edit/:id'
+						component={ProfileForm}
+					/>
 				</Switch>
 			</main>
 			<footer></footer>

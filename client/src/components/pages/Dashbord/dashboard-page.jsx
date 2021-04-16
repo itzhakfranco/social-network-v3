@@ -14,11 +14,11 @@ const Dashboard = ({
 	loading,
 	experiences,
 	fetchUserExperiences,
-	profile_id,
+	profile,
 }) => {
 	useEffect(() => {
-		profile_id && fetchUserExperiences();
-	}, [profile_id, fetchUserExperiences]);
+		profile && fetchUserExperiences();
+	}, [profile, fetchUserExperiences]);
 	return loading ? (
 		<PreLoader />
 	) : (
@@ -32,10 +32,10 @@ const Dashboard = ({
 				</div>
 			</div>
 
-			{!profile_id && (
+			{!profile && (
 				<LinkButton to='/user/create-profile'>Create Profile</LinkButton>
 			)}
-			{profile_id && experiences?.length === 0 && (
+			{profile && experiences?.length === 0 && (
 				<LinkButton to={"/user/create-experience"}>Add Experience</LinkButton>
 			)}
 			{experiences?.length > 0 && <ExperienceTable experiences={experiences} />}
@@ -44,7 +44,7 @@ const Dashboard = ({
 };
 const mapStateToProps = (state) => ({
 	name: state.user.name,
-	profile_id: state.user.profile_id,
+	profile: state.profile.profile,
 	experiences: state.experiences.experiences,
 	loading: state.experiences.loading,
 });

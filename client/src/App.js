@@ -23,11 +23,7 @@ function App() {
 				<Switch>
 					<Route path='/user/signup' component={Signup} />
 					<Route path='/user/signin' component={Signin} />
-					<ProtectedRoute
-						exact
-						path='/user/profile/:id'
-						component={ProfilePage}
-					/>
+					<ProtectedRoute exact path='/user/profile/' component={ProfilePage} />
 					<ProtectedRoute path='/user/dashboard' component={Dashboard} />
 					<ProtectedRoute path='/user/create-profile' component={ProfileForm} />
 					<ProtectedRoute

@@ -2,7 +2,12 @@ const express = require("express");
 const router = express.Router();
 
 const auth = require("../middleware/auth");
-const { Profile, validateProfile } = require("../models/Profile");
+const {
+	Profile,
+	validateProfile,
+	Experience,
+	validateExperience,
+} = require("../models/Profile");
 
 //Add new profile
 router.post("/", auth, async (req, res) => {
@@ -57,11 +62,10 @@ router.put("/:id", auth, async (req, res) => {
 	res.json(profile);
 });
 
-//Fetch Profile
-router.get("/view/:id", auth, async (req, res) => {
+//Fetch LoggedIn User Profile
+router.get("/", auth, async (req, res) => {
 	const profile = await Profile.findOne({
 		user_id: req.user.id,
-		_id: req.params.id,
 	});
 
 	if (!profile) return res.status(404).send("Invalid Profile Id");
@@ -75,132 +79,75 @@ router.delete("/:id", auth, async (req, res) => {
 		user_id: req.user.id,
 	});
 	if (!profile) return res.status(404).send("Invalid Credentials");
-	res.send(profile);
+	res.json({});
 });
 
-/* router.get("/", async (req, res) => {
-	try {
-		const profiles = await Profile.find();
-		res.json(profiles);
-	} catch (err) {
-		console.error(err.message);
-		return res.status(500).send("Server Error");
-	}
+//Add new Experience
+router.post("/experience", auth, async (req, res) => {
+	const { error } = validateExperience(req.body);
+	if (error) return res.status(400).send(error.details[0].message);
+
+	let profile = await Profile.findOneAndUpdate(
+		{ user_id: req.user.id },
+		{ $push: { experience: req.body } },
+		{ new: true }
+	);
+	if (!profile) return res.status(400).send("This user has no profile");
+
+	res.status(201).json(profile);
 });
 
-router.get("/me", auth, async (req, res) => {
-	const profile = await Profile.findOne({
-		user: req.user.id,
+//Get Experience By Id
+router.get("/experience/:id", auth, async (req, res) => {
+	const experience = await Experience.findOne({
+		user_id: req.user.id,
+		_id: req.params.id,
 	});
 
-	if (!profile) return res.status(401).send("There's no profile for this user");
-
-	return res.json(profile);
+	if (!experience) return res.status(400).send("Invalid Experience ID");
+	res.status(200).json(experience);
 });
 
-router.get("/user/:user_id", async (req, res) => {
-	try {
-		const profile = await Profile.findOne({
-			user: req.params.user_id,
-		});
-		if (!profile) res.status(400).send("There's no profile for this user");
-		res.json(profile);
-	} catch (err) {
-		console.error(err.message);
-		res.status(500).send("Server Error");
-	}
-}); */
-
-//must add id as param. Profile.findOneAndRemove({_id:req.params.id, user_id:req.user._id})
-//delete try/catch. if (!profile) return res.status(404).send('The Profile with the given ID not found')
-
-router.post("/education", auth, async (req, res) => {
-	const { error } = validateEducation(req.body);
-
+//Update Experience
+router.put("/experience/edit/:id", auth, async (req, res) => {
+	const { error } = validateExperience(req.body);
 	if (error) return res.status(400).send(error.details[0].message);
 
-	const newEdu = {
-		school: req.body.school,
-		degree: req.body.degree,
-		fieldofstudy: req.body.fieldofstudy,
+	const experience = {
+		title: req.body.title,
+		company: req.body.company,
+		location: req.body.location,
 		from: req.body.from,
 		to: req.body.to,
 		current: req.body.current,
 		description: req.body.description,
 	};
 
-	try {
-		const profile = await Profile.findOne({ user: req.user.id });
-		profile.education.unshift(newEdu);
-		await profile.save();
+	const filter = {
+		user_id: req.user.id,
+		_id: req.params.id,
+	};
 
-		return res.json(profile);
-	} catch (err) {
-		console.error(err.message);
-		return res.status(500).send("Server Error");
-	}
-});
-
-router.put("/education/edit/:id", auth, async (req, res) => {
-	const { error } = validateEducation(req.body);
-	if (error) return res.status(400).send(error.details[0].message);
-
-	const profile = await Profile.findOne({ user: req.user.id });
-
-	const educationPosition = profile.education.findIndex(
-		(edu) => edu._id.toString() === req.params.id
+	const updatedExperience = await Experience.findOneAndUpdate(
+		filter,
+		experience,
+		{ new: true }
 	);
-
-	const updatedEducation = {
-		_id: profile.education[educationPosition]._id,
-		school: req.body.school,
-		degree: req.body.degree,
-		fieldofstudy: req.body.fieldofstudy,
-		from: req.body.from,
-		to: req.body.to,
-		current: req.body.current,
-		description: req.body.description,
-	};
-
-	profile.education[educationPosition] = updatedEducation;
-
-	await profile.save();
-
-	return res.json(profile);
+	res.send(updatedExperience);
 });
 
-router.delete("/education/:edu_id", auth, async (req, res) => {
-	try {
-		const profile = await Profile.findOne({ user: req.user.id });
+router.delete("/experience/:id", auth, async (req, res) => {
+	const experience = await Experience.findOneAndRemove({
+		_id: req.params.id,
+		user_id: req.user.id,
+	});
 
-		const removeIndex = profile.education
-			.map((item) => item.id)
-			.indexOf(req.params.edu_id);
+	if (!experience)
+		return res
+			.status(400)
+			.send("The experience with the given ID was not found.");
 
-		profile.education.splice(removeIndex, 1);
-
-		await profile.save();
-
-		return res.json(profile);
-	} catch (err) {
-		console.error(err.message);
-		return res.status(500).send("Server Error");
-	}
-});
-
-router.get("/education/:eduId", auth, async (req, res) => {
-	try {
-		const profile = await Profile.findOne({
-			user: req.user.id,
-		});
-		if (!profile) res.status(400).send("Invalid Education Id");
-		return res.json(
-			profile.education.filter((edu) => edu._id == req.params.eduId)[0]
-		);
-	} catch (err) {
-		console.error(err.message);
-		return res.status(500).send("Server Error");
-	}
+	res.json(experience);
 });
 
 module.exports = router;

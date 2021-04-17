@@ -21,12 +21,12 @@ export const createProfile = (formData) => async (dispatch) => {
 		payload: data,
 	});
 };
-export const fetchUserProfile = (profileId) => async (dispatch) => {
+export const fetchUserProfile = () => async (dispatch) => {
 	dispatch({
 		type: FETCH_PROFILE_REQUEST,
 	});
 
-	const { data } = await http.get(`/profile/view/${profileId}`);
+	const { data } = await http.get("/profile/me");
 	dispatch({
 		type: FETCH_PROFILE_SUCCESS,
 		payload: data,

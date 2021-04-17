@@ -47,6 +47,47 @@ const profileSchema = new mongoose.Schema({
 		default:
 			"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
 	},
+	experience: [
+		{
+			title: {
+				type: String,
+				minlength: 2,
+				maxlength: 30,
+			},
+			company: {
+				type: String,
+				minlength: 2,
+				maxlength: 255,
+			},
+			location: {
+				type: String,
+				minlength: 2,
+				maxlength: 50,
+			},
+			from: {
+				type: Date,
+			},
+			to: {
+				type: Date,
+			},
+			current: {
+				type: Boolean,
+				default: false,
+			},
+			description: {
+				type: String,
+				minlength: 2,
+				maxlength: 500,
+			},
+		},
+
+		{
+			date: {
+				type: Date,
+				default: Date.now,
+			},
+		},
+	],
 
 	date: {
 		type: Date,
@@ -67,7 +108,21 @@ function validateProfile(user) {
 
 	return schema.validate(user);
 }
+function validateExperience(experience) {
+	const schema = Joi.object({
+		title: Joi.string().min(2).max(30),
+		company: Joi.string().min(2).max(255),
+		location: Joi.string().min(2).max(50),
+		from: Joi.string(),
+		to: Joi.any(),
+		current: Joi.bool(),
+		description: Joi.string().min(2).max(500),
+	});
+
+	return schema.validate(experience);
+}
 
 const Profile = mongoose.model("Profile", profileSchema);
 exports.Profile = Profile;
 exports.validateProfile = validateProfile;
+exports.validateExperience = validateExperience;

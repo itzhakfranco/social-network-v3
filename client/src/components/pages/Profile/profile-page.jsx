@@ -6,23 +6,12 @@ import ProfileExperience from "./profile-experience";
 import ProfileHeader from "./profile-header";
 import ProfilleActions from "./profile-actions";
 
-const ProfilePage = ({
-	fetchUserProfile,
-	profile,
-	experiences,
-	loading,
-	match,
-}) => {
-	useEffect(() => {
-		fetchUserProfile(match.params.id);
-	}, []);
-
-	return loading ? <PreLoader /> : <>{<ProfilleActions profile={profile} />}</>;
+const ProfilePage = ({ profile, experiences, loading, match }) => {
+	return <>{<ProfilleActions profile={profile} />}</>;
 };
 
 const mapStateToProps = (state) => ({
 	profile: state.profile.profile,
-	loading: state.profile.loading,
 	experiences: state.experiences.experiences,
 });
 

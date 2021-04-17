@@ -12,8 +12,8 @@ class ProfileActions extends Component {
 		if (result.value) this.handleDelete(profileId);
 	};
 
-	async handleDelete(profileId) {
-		await this.props.deleteProfile(profileId);
+	handleDelete(profileId) {
+		this.props.deleteProfile(profileId);
 		this.props.history.replace("/user/dashboard");
 		toast.success("Profile was delete successfully");
 	}

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
+import { fetchUserProfile } from "../../../store/profile/profileActions";
 import { fetchUserExperiences } from "../../../store/experience/experienceActions";
 
 import PageHeader from "../../common/page-header";
@@ -13,12 +14,14 @@ const Dashboard = ({
 	name,
 	loading,
 	experiences,
+	fetchUserProfile,
 	fetchUserExperiences,
 	profile,
 }) => {
 	useEffect(() => {
+		fetchUserProfile();
 		profile && fetchUserExperiences();
-	}, [profile, fetchUserExperiences]);
+	}, []);
 	return loading ? (
 		<PreLoader />
 	) : (
@@ -49,4 +52,7 @@ const mapStateToProps = (state) => ({
 	loading: state.experiences.loading,
 });
 
-export default connect(mapStateToProps, { fetchUserExperiences })(Dashboard);
+export default connect(mapStateToProps, {
+	fetchUserProfile,
+	fetchUserExperiences,
+})(Dashboard);

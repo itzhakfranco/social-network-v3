@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import ExperienceRow from "./experience-row";
 
-const ExperienceTable = ({ experiences }) => {
+const ExperienceTable = ({ experience }) => {
 	return (
 		<div className='container mt-4'>
 			<div className='card'>
@@ -31,7 +31,7 @@ const ExperienceTable = ({ experiences }) => {
 							</tr>
 						</thead>
 						<tbody>
-							<ExperienceRow experiences={experiences} />
+							<ExperienceRow experience={experience} />
 						</tbody>
 					</table>
 				</div>

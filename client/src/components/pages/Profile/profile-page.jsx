@@ -6,13 +6,12 @@ import ProfileExperience from "./profile-experience";
 import ProfileHeader from "./profile-header";
 import ProfilleActions from "./profile-actions";
 
-const ProfilePage = ({ profile, experiences, loading, match }) => {
+const ProfilePage = ({ profile }) => {
 	return <>{<ProfilleActions profile={profile} />}</>;
 };
 
 const mapStateToProps = (state) => ({
 	profile: state.profile.profile,
-	experiences: state.experiences.experiences,
 });
 
 export default connect(mapStateToProps, { fetchUserProfile })(ProfilePage);

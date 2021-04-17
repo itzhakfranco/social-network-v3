@@ -5,7 +5,6 @@ const token = localStorage.getItem("token");
 axios.defaults.baseURL = "http://localhost:7777/api";
 axios.defaults.headers.common["x-auth-token"] = token;
 
-console.log("fsss");
 axios.interceptors.response.use(null, (error) => {
 	const expectedError = error.response && error.response.status >= 403;
 	if (expectedError) toast.error("An unexpected error occurred");

@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import { fetchUserProfile } from "../../../store/profile/profileActions";
-import { fetchUserExperiences } from "../../../store/experience/experienceActions";
 
 import PageHeader from "../../common/page-header";
 import ExperienceTable from "./experience-table";
@@ -13,14 +12,12 @@ import PreLoader from "../../../utils/pre-loader";
 const Dashboard = ({
 	name,
 	loading,
-	experiences,
+	experience,
 	fetchUserProfile,
-	fetchUserExperiences,
 	profile,
 }) => {
 	useEffect(() => {
 		fetchUserProfile();
-		profile && fetchUserExperiences();
 	}, []);
 	return loading ? (
 		<PreLoader />
@@ -38,21 +35,20 @@ const Dashboard = ({
 			{!profile && (
 				<LinkButton to='/user/create-profile'>Create Profile</LinkButton>
 			)}
-			{profile && experiences?.length === 0 && (
+			{profile && experience?.length === 0 && (
 				<LinkButton to={"/user/create-experience"}>Add Experience</LinkButton>
 			)}
-			{experiences?.length > 0 && <ExperienceTable experiences={experiences} />}
+			{experience?.length > 0 && <ExperienceTable experience={experience} />}
 		</div>
 	);
 };
 const mapStateToProps = (state) => ({
 	name: state.user.name,
 	profile: state.profile.profile,
-	experiences: state.experiences.experiences,
-	loading: state.experiences.loading,
+	experience: state.profile.profile.experience,
+	loading: state.profile.loading,
 });
 
 export default connect(mapStateToProps, {
 	fetchUserProfile,
-	fetchUserExperiences,
 })(Dashboard);

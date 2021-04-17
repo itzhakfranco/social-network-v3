@@ -6,7 +6,7 @@ import moment from "moment";
 
 import { connect } from "react-redux";
 
-import { deleteExperience } from "../../../store/experience/experienceActions";
+import { deleteExperience } from "../../../store/profile/profileActions";
 
 import { toast } from "react-toastify";
 import { swalConfirmDelete } from "../../../config.json";
@@ -22,9 +22,9 @@ class ExperienceRow extends Component {
 	};
 
 	render() {
-		const { experiences } = this.props;
+		const { experience } = this.props;
 
-		return experiences.map((exp, index) => (
+		return experience.map((exp, index) => (
 			<tr key={index}>
 				<th scope='row'>{++index}</th>
 				<td>{exp.company}</td>

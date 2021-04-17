@@ -1,7 +1,6 @@
 import React from "react";
 import Form from "../../common/form";
 import Joi from "joi-browser";
-import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 
 import PreLoader from "../../../utils/pre-loader";
@@ -10,7 +9,7 @@ import {
 	addExperience,
 	updateExperience,
 	fetchExperienceById,
-} from "../../../store/experience/experienceActions";
+} from "../../../store/profile/profileActions";
 
 class ExperienceForm extends Form {
 	state = {
@@ -184,7 +183,7 @@ class ExperienceForm extends Form {
 }
 
 const mapStateToProps = (state) => ({
-	loading: state.experiences.loading,
+	loading: state.profile.loading,
 });
 export default connect(mapStateToProps, {
 	addExperience,

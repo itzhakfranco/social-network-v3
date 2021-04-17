@@ -68,8 +68,8 @@ router.get("/", auth, async (req, res) => {
 		user_id: req.user.id,
 	});
 
-	if (!profile) return res.status(404).send("Invalid Profile Id");
-	res.send(profile);
+	if (!profile) return res.status(204).json(null);
+	res.json(profile);
 });
 
 //Delete Profile
@@ -78,8 +78,7 @@ router.delete("/:id", auth, async (req, res) => {
 		_id: req.params.id,
 		user_id: req.user.id,
 	});
-	if (!profile) return res.status(404).send("Invalid Credentials");
-	res.json({});
+	if (profile) return res.status(200).res.json({});
 });
 
 //Add new Experience
@@ -99,13 +98,17 @@ router.post("/experience", auth, async (req, res) => {
 
 //Get Experience By Id
 router.get("/experience/:id", auth, async (req, res) => {
-	const experience = await Experience.findOne({
+	const profile = await Profile.findOne({
 		user_id: req.user.id,
-		_id: req.params.id,
 	});
 
-	if (!experience) return res.status(400).send("Invalid Experience ID");
-	res.status(200).json(experience);
+	if (!profile) return res.status(400).send("Invalid Experience ID");
+
+	const experience = profile.experience.filter(
+		(exp) => exp._id == req.params.id
+	)[0];
+
+	res.json(experience);
 });
 
 //Update Experience
@@ -113,7 +116,14 @@ router.put("/experience/edit/:id", auth, async (req, res) => {
 	const { error } = validateExperience(req.body);
 	if (error) return res.status(400).send(error.details[0].message);
 
-	const experience = {
+	const profile = await Profile.findOne({ user_id: req.user.id });
+	if (!profile) return res.status(400).send("Invlaid ID");
+	const experiencePosition = profile.experience.findIndex(
+		(exp) => exp._id.toString() === req.params.id
+	);
+
+	const updatedExperince = {
+		_id: profile.experience[experiencePosition]._id,
 		title: req.body.title,
 		company: req.body.company,
 		location: req.body.location,
@@ -123,31 +133,24 @@ router.put("/experience/edit/:id", auth, async (req, res) => {
 		description: req.body.description,
 	};
 
-	const filter = {
-		user_id: req.user.id,
-		_id: req.params.id,
-	};
+	profile.experience[experiencePosition] = updatedExperince;
 
-	const updatedExperience = await Experience.findOneAndUpdate(
-		filter,
-		experience,
-		{ new: true }
-	);
-	res.send(updatedExperience);
+	await profile.save();
+
+	return res.json(profile);
 });
 
 router.delete("/experience/:id", auth, async (req, res) => {
-	const experience = await Experience.findOneAndRemove({
-		_id: req.params.id,
-		user_id: req.user.id,
-	});
+	const profile = await Profile.findOne({ user_id: req.user.id });
 
-	if (!experience)
-		return res
-			.status(400)
-			.send("The experience with the given ID was not found.");
+	const removeIndex = profile.experience
+		.map((item) => item.id)
+		.indexOf(req.params.id);
 
-	res.json(experience);
+	profile.experience.splice(removeIndex, 1);
+
+	await profile.save();
+	res.json(profile);
 });
 
 module.exports = router;

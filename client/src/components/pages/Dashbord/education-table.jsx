@@ -12,7 +12,7 @@ const EducationTable = ({ education }) => {
 					<Link
 						className='btn btn-success float-right'
 						role='button'
-						to='/user/create-experience'
+						to='/user/create-education'
 					>
 						<i className='fas fa-plus-circle text-white mr-2'></i>Add Education
 					</Link>

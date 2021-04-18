@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { swalConfirmDelete } from "../../../config.json";
 import Swal from "sweetalert2";
 import { deleteProfile } from "../../../store/profile/profileActions";
@@ -48,4 +48,4 @@ class ProfileActions extends Component {
 	}
 }
 
-export default connect(null, { deleteProfile })(ProfileActions);
+export default connect(null, { deleteProfile })(withRouter(ProfileActions));

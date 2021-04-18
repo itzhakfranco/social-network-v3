@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { fetchUserProfile } from "../../../store/profile/profileActions";
 import PreLoader from "../../../utils/pre-loader";

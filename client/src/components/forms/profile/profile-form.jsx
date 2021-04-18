@@ -52,13 +52,7 @@ class ProfileForm extends Form {
 	}
 
 	doSubmit = async () => {
-		const {
-			createProfile,
-			updateProfile,
-			history,
-			match,
-			profile,
-		} = this.props;
+		const { createProfile, updateProfile, history, match } = this.props;
 
 		const { data } = this.state;
 		if (!match.params.id) {
@@ -68,7 +62,7 @@ class ProfileForm extends Form {
 		} else {
 			updateProfile(data, match.params.id);
 			toast("Awesome! your profile has been Updated.");
-			history.push("/user/dashboard");
+			history.push("/user/profile");
 		}
 	};
 

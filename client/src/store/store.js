@@ -3,12 +3,14 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import userReducer from "./user/userReducer";
 import profileReducer from "./profile/profileReducer";
+import profilesReducer from "./profiles/profilesReducer";
 
 const composeEnhancers = composeWithDevTools({});
 
 const rootReducer = combineReducers({
 	user: userReducer,
 	profile: profileReducer,
+	profiles: profilesReducer,
 });
 
 const loadState = () => {

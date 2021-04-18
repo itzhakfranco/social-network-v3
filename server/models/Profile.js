@@ -42,7 +42,7 @@ const profileSchema = new mongoose.Schema({
 	},
 	image: {
 		type: String,
-		minlength: 11,
+		minlength: 0,
 		maxlength: 1024,
 		default:
 			"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
@@ -141,7 +141,7 @@ function validateProfile(user) {
 		status: Joi.string().required().required(),
 		skills: Joi.string().min(1).max(255).required(),
 		bio: Joi.string().min(2).max(500).required(),
-		image: Joi.string().min(11).max(1024).allow(""),
+		image: Joi.string().min(0).max(1024).allow(""),
 	});
 
 	return schema.validate(user);

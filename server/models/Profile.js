@@ -88,6 +88,44 @@ const profileSchema = new mongoose.Schema({
 			},
 		},
 	],
+	education: [
+		{
+			school: {
+				type: String,
+				required: true,
+				minlength: 2,
+				maxlength: 255,
+			},
+			degree: {
+				type: String,
+				required: true,
+				minlength: 2,
+				maxlength: 255,
+			},
+			fieldofstudy: {
+				type: String,
+				required: true,
+				minlength: 2,
+				maxlength: 255,
+			},
+			from: {
+				type: Date,
+				required: true,
+			},
+			to: {
+				type: Date,
+			},
+			current: {
+				type: Boolean,
+				default: false,
+			},
+			description: {
+				type: String,
+				minlength: 2,
+				maxlength: 500,
+			},
+		},
+	],
 
 	date: {
 		type: Date,
@@ -122,7 +160,22 @@ function validateExperience(experience) {
 	return schema.validate(experience);
 }
 
+function validateEducation(education) {
+	const schema = Joi.object({
+		school: Joi.string().min(2).max(30).required(),
+		degree: Joi.string().min(2).max(255).required(),
+		fieldofstudy: Joi.string().min(2).max(50),
+		from: Joi.string().required(),
+		to: Joi.any(),
+		current: Joi.bool(),
+		description: Joi.string().min(2).max(500),
+	});
+
+	return schema.validate(education);
+}
+
 const Profile = mongoose.model("Profile", profileSchema);
 exports.Profile = Profile;
 exports.validateProfile = validateProfile;
 exports.validateExperience = validateExperience;
+exports.validateEducation = validateEducation;

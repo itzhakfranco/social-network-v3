@@ -7,6 +7,7 @@ import Signup from "./components/forms/auth/signup";
 import Dashboard from "./components/pages/Dashbord/dashboard-page";
 
 import ExperienceForm from "./components/forms/profile/experience-form";
+import EducationForm from "./components/forms/profile/education-form";
 import ProfileForm from "./components/forms/profile/profile-form";
 import ProfilePage from "./components/pages/Profile/profile-page";
 
@@ -31,8 +32,16 @@ function App() {
 						component={ExperienceForm}
 					/>
 					<ProtectedRoute
+						path='/user/education/edit/:id'
+						component={EducationForm}
+					/>
+					<ProtectedRoute
 						path='/user/create-experience'
 						component={ExperienceForm}
+					/>
+					<ProtectedRoute
+						path='/user/create-education'
+						component={EducationForm}
 					/>
 					<ProtectedRoute
 						exact

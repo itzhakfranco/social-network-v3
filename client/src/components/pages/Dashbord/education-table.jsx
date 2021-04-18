@@ -1,20 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import ExperienceRow from "./experience-row";
+import EducationRow from "./education-row";
 
-const ExperienceTable = ({ experience }) => {
+const EducationTable = ({ education }) => {
 	return (
 		<div className='container mt-4'>
 			<div className='card'>
 				<div className='card-header'>
-					<strong className='card-title'>Experience Table</strong>
+					<strong className='card-title'>Education Table</strong>
 					<Link
 						className='btn btn-success float-right'
 						role='button'
 						to='/user/create-experience'
 					>
-						<i className='fas fa-plus-circle text-white mr-2'></i>Add Experience
+						<i className='fas fa-plus-circle text-white mr-2'></i>Add Education
 					</Link>
 				</div>
 				<div className='card-body'>
@@ -22,8 +22,8 @@ const ExperienceTable = ({ experience }) => {
 						<thead>
 							<tr>
 								<th scope='col'>#</th>
-								<th scope='col'>Company</th>
-								<th scope='col'>Title</th>
+								<th scope='col'>Field Of Study</th>
+								<th scope='col'>Degree</th>
 								<th scope='col'>Years</th>
 								<th className='text-center' scope='col'>
 									Actions
@@ -31,7 +31,7 @@ const ExperienceTable = ({ experience }) => {
 							</tr>
 						</thead>
 						<tbody>
-							<ExperienceRow experience={experience} />
+							<EducationRow education={education} />
 						</tbody>
 					</table>
 				</div>
@@ -40,4 +40,4 @@ const ExperienceTable = ({ experience }) => {
 	);
 };
 
-export default ExperienceTable;
+export default EducationTable;

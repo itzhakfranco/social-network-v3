@@ -69,18 +69,6 @@ const profileReducer = (state = intialState, action) => {
 				loading: false,
 			};
 
-		case actionTypes.FETCH_USER_EXPERIENCES_REQUEST: {
-			return {
-				...state,
-				loading: true,
-			};
-		}
-		case actionTypes.FETCH_USER_EXPERIENCES_SUCCESS: {
-			return {
-				experiences: action.payload,
-				loading: false,
-			};
-		}
 		case actionTypes.FETCH_EXPERIENCE_BY_ID_REQUEST:
 			return {
 				...state,
@@ -111,6 +99,53 @@ const profileReducer = (state = intialState, action) => {
 				loading: true,
 			};
 		case actionTypes.DELETE_EXPERIENCE_SUCCESS:
+			return {
+				...state,
+				profile: action.payload,
+				loading: false,
+			};
+		case actionTypes.CREATE_EDUCATION_REQUEST:
+			return {
+				...state,
+				loading: true,
+			};
+		case actionTypes.CREATE_EDUCATION_SUCCESS:
+			return {
+				...state,
+				profile: action.payload,
+				loading: false,
+			};
+
+		case actionTypes.FETCH_EDUCATION_BY_ID_REQUEST:
+			return {
+				...state,
+				loading: true,
+			};
+		case actionTypes.FETCH_EDUCATION_BY_ID_SUCCESS:
+			return {
+				...state,
+				loading: false,
+				profile: action.payload,
+			};
+
+		case actionTypes.UPDATE_EDUCATION_REQUEST:
+			return {
+				...state,
+				loading: true,
+			};
+		case actionTypes.UPDATE_EDUCATION_SUCCESS:
+			return {
+				...state,
+				profile: action.payload,
+				loading: false,
+			};
+
+		case actionTypes.DELETE_EDUCATION_REQUEST:
+			return {
+				...state,
+				loading: true,
+			};
+		case actionTypes.DELETE_EDUCATION_SUCCESS:
 			return {
 				...state,
 				profile: action.payload,

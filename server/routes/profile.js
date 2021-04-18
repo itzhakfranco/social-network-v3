@@ -4,10 +4,12 @@ const router = express.Router();
 const auth = require("../middleware/auth");
 const {
 	Profile,
-	validateProfile,
-	Experience,
+	validateEducation,
 	validateExperience,
+	validateProfile,
 } = require("../models/Profile");
+
+//Profile Section
 
 //Add new profile
 router.post("/", auth, async (req, res) => {
@@ -78,8 +80,11 @@ router.delete("/:id", auth, async (req, res) => {
 		_id: req.params.id,
 		user_id: req.user.id,
 	});
+	if (!profile) return res.status(400).send("Invalid Profile Id");
 	if (profile) return res.status(204).json({});
 });
+
+//Experience Section
 
 //Add new Experience
 router.post("/experience", auth, async (req, res) => {
@@ -137,9 +142,10 @@ router.put("/experience/edit/:id", auth, async (req, res) => {
 
 	await profile.save();
 
-	return res.json(profile);
+	res.json(profile);
 });
 
+//Delete Experience
 router.delete("/experience/:id", auth, async (req, res) => {
 	const profile = await Profile.findOne({ user_id: req.user.id });
 
@@ -148,6 +154,81 @@ router.delete("/experience/:id", auth, async (req, res) => {
 		.indexOf(req.params.id);
 
 	profile.experience.splice(removeIndex, 1);
+
+	await profile.save();
+	res.json(profile);
+});
+
+//Eduction Section
+
+//Add new Experience
+router.post("/education", auth, async (req, res) => {
+	const { error } = validateEducation(req.body);
+	if (error) return res.status(400).send(error.details[0].message);
+
+	let profile = await Profile.findOneAndUpdate(
+		{ user_id: req.user.id },
+		{ $push: { education: req.body } },
+		{ new: true }
+	);
+	if (!profile) return res.status(400).send("This user has no profile");
+
+	res.status(201).json(profile);
+});
+
+//Get Experience By Id
+router.get("/education/:id", auth, async (req, res) => {
+	const profile = await Profile.findOne({
+		user_id: req.user.id,
+	});
+
+	if (!profile) return res.status(400).send("Invalid Education ID");
+
+	const education = profile.education.filter(
+		(edu) => edu._id == req.params.id
+	)[0];
+
+	res.json(education);
+});
+
+//Update Experience
+router.put("/education/edit/:id", auth, async (req, res) => {
+	const { error } = validateEducation(req.body);
+	if (error) return res.status(400).send(error.details[0].message);
+
+	const profile = await Profile.findOne({ user_id: req.user.id });
+	if (!profile) return res.status(400).send("Invlaid ID");
+	const educationPosition = profile.education.findIndex(
+		(edu) => edu._id.toString() === req.params.id
+	);
+
+	const updatedEducation = {
+		_id: profile.education[educationPosition]._id,
+		school: req.body.school,
+		degree: req.body.degree,
+		fieldofstudy: req.body.fieldofstudy,
+		from: req.body.from,
+		to: req.body.to,
+		current: req.body.current,
+		description: req.body.description,
+	};
+
+	profile.education[educationPosition] = updatedEducation;
+
+	await profile.save();
+
+	res.json(profile);
+});
+
+//Delete Experience
+router.delete("/education/:id", auth, async (req, res) => {
+	const profile = await Profile.findOne({ user_id: req.user.id });
+
+	const removeIndex = profile.education
+		.map((item) => item.id)
+		.indexOf(req.params.id);
+
+	profile.education.splice(removeIndex, 1);
 
 	await profile.save();
 	res.json(profile);

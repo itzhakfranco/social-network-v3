@@ -5,6 +5,7 @@ import { fetchUserProfile } from "../../../store/profile/profileActions";
 
 import PageHeader from "../../common/page-header";
 import ExperienceTable from "./experience-table";
+import EducationTable from "./education-table";
 import LinkButton from "../../common/link-button";
 
 import PreLoader from "../../../utils/pre-loader";
@@ -14,7 +15,7 @@ class Dashboard extends Component {
 		!this.props.profile && this.props.fetchUserProfile();
 	}
 	render() {
-		const { name, loading, experience, profile } = this.props;
+		const { name, loading, experience, education, profile } = this.props;
 		if (loading) return <PreLoader />;
 		return (
 			<div className='container'>
@@ -34,6 +35,11 @@ class Dashboard extends Component {
 					<LinkButton to={"/user/create-experience"}>Add Experience</LinkButton>
 				)}
 				{experience?.length > 0 && <ExperienceTable experience={experience} />}
+
+				{profile && education?.length === 0 && (
+					<LinkButton to={"/user/create-education"}>Add Education</LinkButton>
+				)}
+				{education?.length > 0 && <EducationTable education={education} />}
 			</div>
 		);
 	}
@@ -42,6 +48,7 @@ const mapStateToProps = (state) => ({
 	name: state.user.name,
 	profile: state.profile.profile,
 	experience: state.profile?.profile?.experience,
+	education: state.profile?.profile?.education,
 	loading: state.profile.loading,
 });
 

@@ -78,7 +78,7 @@ router.delete("/:id", auth, async (req, res) => {
 		_id: req.params.id,
 		user_id: req.user.id,
 	});
-	if (profile) return res.status(200).res.json({});
+	if (profile) return res.status(204).json({});
 });
 
 //Add new Experience

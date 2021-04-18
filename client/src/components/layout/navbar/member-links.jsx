@@ -29,7 +29,7 @@ const MemberLinks = ({ has_profile, name, logout }) => (
 				</NavLink>
 			</li>
 
-			{has_profile && (
+			{has_profile ? (
 				<li className='nav-item'>
 					<NavLink
 						className='nav-link btn btn-secondary text-white mr-4'
@@ -37,6 +37,15 @@ const MemberLinks = ({ has_profile, name, logout }) => (
 					>
 						<i className='far fa-user mx-1'></i>
 						{`${name} Profile`}
+					</NavLink>
+				</li>
+			) : (
+				<li className='nav-item '>
+					<NavLink
+						className='nav-link btn btn-secondary text-white mr-4'
+						to={`/user/create-profile`}
+					>
+						<i className='far fa-user mx-1'></i> Create Profile
 					</NavLink>
 				</li>
 			)}

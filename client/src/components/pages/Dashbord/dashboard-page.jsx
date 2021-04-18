@@ -11,7 +11,7 @@ import PreLoader from "../../../utils/pre-loader";
 
 class Dashboard extends Component {
 	componentDidMount() {
-		this.props.fetchUserProfile();
+		!this.props.profile && this.props.fetchUserProfile();
 	}
 	render() {
 		const { name, loading, experience, profile } = this.props;

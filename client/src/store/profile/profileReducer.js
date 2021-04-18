@@ -37,8 +37,8 @@ const profileReducer = (state = intialState, action) => {
 		case actionTypes.UPDATE_PROFILE_SUCCESS:
 			return {
 				...state,
-				profile: action.payload.profile,
-				loading: true,
+				profile: action.payload,
+				loading: false,
 			};
 		case actionTypes.FETCH_PROFILE_FAILED:
 			return {
@@ -55,7 +55,7 @@ const profileReducer = (state = intialState, action) => {
 			return {
 				...state,
 				profile: null,
-				loading: true,
+				loading: false,
 			};
 		case actionTypes.CREATE_EXPERIENCE_REQUEST:
 			return {
@@ -64,11 +64,14 @@ const profileReducer = (state = intialState, action) => {
 			};
 		case actionTypes.CREATE_EXPERIENCE_SUCCESS:
 			return {
+				...state,
+				profile: action.payload,
 				loading: false,
 			};
 
 		case actionTypes.FETCH_USER_EXPERIENCES_REQUEST: {
 			return {
+				...state,
 				loading: true,
 			};
 		}
@@ -87,7 +90,7 @@ const profileReducer = (state = intialState, action) => {
 			return {
 				...state,
 				loading: false,
-				experience: action.payload,
+				profile: action.payload,
 			};
 
 		case actionTypes.UPDATE_EXPERIENCE_REQUEST:
@@ -98,7 +101,7 @@ const profileReducer = (state = intialState, action) => {
 		case actionTypes.UPDATE_EXPERIENCE_SUCCESS:
 			return {
 				...state,
-				experience: action.payload,
+				profile: action.payload,
 				loading: false,
 			};
 

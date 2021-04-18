@@ -79,9 +79,7 @@ class ExperienceForm extends Form {
 		}
 	};
 	render() {
-		{
-			this.props.loading && <PreLoader />;
-		}
+		this.props.loading && <PreLoader />;
 		return (
 			<>
 				<form

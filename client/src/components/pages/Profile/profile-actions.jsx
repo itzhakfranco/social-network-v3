@@ -26,7 +26,7 @@ class ProfileActions extends Component {
 						<Link className='btn btn-dark ' to='/profiles'>
 							Back To Profiles
 						</Link>
-						{user_id == profile.user_id && (
+						{user_id === profile.user_id && (
 							<>
 								<Link
 									className='btn btn-primary float-right mr-2'

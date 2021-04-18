@@ -64,7 +64,7 @@ const profileReducer = (state = intialState, action) => {
 			};
 		case actionTypes.CREATE_EXPERIENCE_SUCCESS:
 			return {
-				loading: true,
+				loading: false,
 			};
 
 		case actionTypes.FETCH_USER_EXPERIENCES_REQUEST: {
@@ -101,18 +101,17 @@ const profileReducer = (state = intialState, action) => {
 				experience: action.payload,
 				loading: false,
 			};
-		case actionTypes.DELETE_EXPERIENCE_SUCCESS:
-			return {
-				...state,
-				profile: state.profile.experience.filter(
-					(experience) => experience._id !== action.payload
-				),
-				loading: false,
-			};
+
 		case actionTypes.DELETE_EXPERIENCE_REQUEST:
 			return {
 				...state,
 				loading: true,
+			};
+		case actionTypes.DELETE_EXPERIENCE_SUCCESS:
+			return {
+				...state,
+				profile: action.payload,
+				loading: false,
 			};
 		default:
 			return state;

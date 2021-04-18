@@ -134,10 +134,10 @@ export const deleteExperience = (experienceId) => async (dispatch) => {
 		type: DELETE_EXPERIENCE_REQUEST,
 	});
 
-	await http.delete(`/profile/experience/${experienceId}`);
+	const { data } = await http.delete(`/profile/experience/${experienceId}`);
 
 	dispatch({
 		type: DELETE_EXPERIENCE_SUCCESS,
-		payload: experienceId,
+		payload: data,
 	});
 };

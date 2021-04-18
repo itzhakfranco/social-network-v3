@@ -64,6 +64,14 @@ router.put("/:id", auth, async (req, res) => {
 	res.json(profile);
 });
 
+//Fetch All Profiles
+router.get("/view/profiles", auth, async (req, res) => {
+	const profiles = await Profile.find({});
+
+	if (!profiles) return res.status(500).send("Server Error");
+	res.json(profiles);
+});
+
 //Fetch LoggedIn User Profile
 router.get("/", auth, async (req, res) => {
 	const profile = await Profile.findOne({
@@ -71,6 +79,16 @@ router.get("/", auth, async (req, res) => {
 	});
 
 	if (!profile) return res.status(204).json(null);
+	res.json(profile);
+});
+
+//Fetch Profile By Id
+router.get("/:id", auth, async (req, res) => {
+	const profile = await Profile.findOne({
+		_id: req.params.id,
+	});
+
+	if (!profile) return res.status(400).send("Invalid Profile Id");
 	res.json(profile);
 });
 

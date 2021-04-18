@@ -1,16 +1,8 @@
-import React, { Fragment } from "react";
-import { connect } from "react-redux";
-import PreLoader from "../../../utils/pre-loader";
-//import ProfileActions from "./profile-actions";
+import React from "react";
 
 const ProfileHeader = ({ profile }) => {
-	return !profile ? (
-		<PreLoader />
-	) : (
-		<Fragment>
-			<div className='row'>
-				<div className='col-lg-12 mt-4'>{/*  <ProfileActions /> */}</div>
-			</div>
+	return (
+		<>
 			<div className='row'>
 				<div className='col-lg-12'>
 					<div className='text-center bg-dark my-4 py-5'>
@@ -51,10 +43,8 @@ const ProfileHeader = ({ profile }) => {
 					</div>
 				</div>
 			</div>
-		</Fragment>
+		</>
 	);
 };
-const mapStateToProps = (state) => ({
-	profile: state.profile.profile,
-});
-export default connect(mapStateToProps, null)(ProfileHeader);
+
+export default ProfileHeader;

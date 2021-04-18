@@ -61,7 +61,7 @@ export const addExperience = (formData) => async (dispatch) => {
 	dispatch({
 		type: actionTypes.CREATE_EDUCATION_REQUEST,
 	});
-	const { data } = await http.post("/profile/EDUCATION", formData);
+	const { data } = await http.post("/profile/experience", formData);
 	dispatch({
 		type: actionTypes.CREATE_EDUCATION_SUCCESS,
 		payload: data,

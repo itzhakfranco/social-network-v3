@@ -53,7 +53,6 @@ const userReducer = (state = intialState, action) => {
 			localStorage.removeItem("token");
 			return {
 				token: null,
-
 				name: "",
 				loading: false,
 			};

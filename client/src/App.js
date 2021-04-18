@@ -10,6 +10,8 @@ import ExperienceForm from "./components/forms/profile/experience-form";
 import EducationForm from "./components/forms/profile/education-form";
 import ProfileForm from "./components/forms/profile/profile-form";
 import ProfilePage from "./components/pages/Profile/profile-page";
+import PostsPage from "./components/pages/Posts/posts-page";
+import ProfilesPage from "./components/pages/profiles/profiles-page";
 
 import { ToastContainer } from "react-toastify";
 
@@ -27,6 +29,8 @@ function App() {
 					<ProtectedRoute exact path='/user/profile/' component={ProfilePage} />
 					<ProtectedRoute path='/user/dashboard' component={Dashboard} />
 					<ProtectedRoute path='/user/create-profile' component={ProfileForm} />
+					<ProtectedRoute path='/posts' component={PostsPage} />
+					<ProtectedRoute path='/profiles' component={ProfilesPage} />
 					<ProtectedRoute
 						path='/user/experience/edit/:id'
 						component={ExperienceForm}

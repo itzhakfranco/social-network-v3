@@ -13,4 +13,5 @@ export const fetchAllProfiles = () => async (dispatch) => {
 		type: actionTypes.FETCH_ALL_PROFILES_SUCCESS,
 		payload: data,
 	});
+	return data;
 };

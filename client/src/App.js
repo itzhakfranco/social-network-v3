@@ -30,7 +30,9 @@ function App() {
 					<ProtectedRoute path='/user/dashboard' component={Dashboard} />
 					<ProtectedRoute path='/user/create-profile' component={ProfileForm} />
 					<ProtectedRoute path='/posts' component={PostsPage} />
+					<ProtectedRoute path='/profiles/:id' component={ProfilePage} />
 					<ProtectedRoute path='/profiles' component={ProfilesPage} />
+
 					<ProtectedRoute
 						path='/user/experience/edit/:id'
 						component={ExperienceForm}

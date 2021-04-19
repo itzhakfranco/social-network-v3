@@ -1,8 +1,8 @@
 import * as actionTypes from "./profileType";
 
 const intialState = {
-	profile: null,
-	currentUserProfileId: null,
+	guestProfile: null,
+	memberProfile: null,
 	loading: false,
 };
 
@@ -16,8 +16,7 @@ const profileReducer = (state = intialState, action) => {
 		case actionTypes.CREATE_PROFILE_SUCCESS:
 			return {
 				...state,
-				profile: action.payload,
-				currentUserProfileId: action.payload._id,
+				memberProfile: action.payload,
 				loading: false,
 			};
 		case actionTypes.FETCH_PROFILE_REQUEST:
@@ -28,8 +27,7 @@ const profileReducer = (state = intialState, action) => {
 		case actionTypes.FETCH_PROFILE_SUCCESS:
 			return {
 				...state,
-				profile: action.payload,
-				currentUserProfileId: action.payload._id,
+				memberProfile: action.payload,
 				loading: false,
 			};
 		case actionTypes.FETCH_PROFILE_BY_ID_REQUEST:
@@ -40,7 +38,7 @@ const profileReducer = (state = intialState, action) => {
 		case actionTypes.FETCH_PROFILE_BY_ID_SUCCESS:
 			return {
 				...state,
-				profile: action.payload,
+				guestProfile: action.payload,
 				loading: false,
 			};
 
@@ -52,7 +50,7 @@ const profileReducer = (state = intialState, action) => {
 		case actionTypes.UPDATE_PROFILE_SUCCESS:
 			return {
 				...state,
-				profile: action.payload,
+				memProfile: action.payload,
 				loading: false,
 			};
 		case actionTypes.FETCH_PROFILE_FAILED:
@@ -69,7 +67,7 @@ const profileReducer = (state = intialState, action) => {
 		case actionTypes.DELETE_PROFILE_SUCCESS:
 			return {
 				...state,
-				profile: null,
+				memberProfile: null,
 				loading: false,
 			};
 		case actionTypes.CREATE_EXPERIENCE_REQUEST:
@@ -80,7 +78,7 @@ const profileReducer = (state = intialState, action) => {
 		case actionTypes.CREATE_EXPERIENCE_SUCCESS:
 			return {
 				...state,
-				profile: action.payload,
+				memberProfile: action.payload,
 				loading: false,
 			};
 
@@ -93,7 +91,7 @@ const profileReducer = (state = intialState, action) => {
 			return {
 				...state,
 				loading: false,
-				profile: action.payload,
+				guestProfile: action.payload,
 			};
 
 		case actionTypes.UPDATE_EXPERIENCE_REQUEST:
@@ -104,7 +102,7 @@ const profileReducer = (state = intialState, action) => {
 		case actionTypes.UPDATE_EXPERIENCE_SUCCESS:
 			return {
 				...state,
-				profile: action.payload,
+				memberProfile: action.payload,
 				loading: false,
 			};
 
@@ -116,7 +114,7 @@ const profileReducer = (state = intialState, action) => {
 		case actionTypes.DELETE_EXPERIENCE_SUCCESS:
 			return {
 				...state,
-				profile: action.payload,
+				memberProfile: action.payload,
 				loading: false,
 			};
 		case actionTypes.CREATE_EDUCATION_REQUEST:
@@ -127,7 +125,7 @@ const profileReducer = (state = intialState, action) => {
 		case actionTypes.CREATE_EDUCATION_SUCCESS:
 			return {
 				...state,
-				profile: action.payload,
+				memberProfile: action.payload,
 				loading: false,
 			};
 
@@ -140,7 +138,7 @@ const profileReducer = (state = intialState, action) => {
 			return {
 				...state,
 				loading: false,
-				profile: action.payload,
+				guestProfile: action.payload,
 			};
 
 		case actionTypes.UPDATE_EDUCATION_REQUEST:
@@ -151,7 +149,7 @@ const profileReducer = (state = intialState, action) => {
 		case actionTypes.UPDATE_EDUCATION_SUCCESS:
 			return {
 				...state,
-				profile: action.payload,
+				memberProfile: action.payload,
 				loading: false,
 			};
 
@@ -163,7 +161,7 @@ const profileReducer = (state = intialState, action) => {
 		case actionTypes.DELETE_EDUCATION_SUCCESS:
 			return {
 				...state,
-				profile: action.payload,
+				memberProfile: action.payload,
 				loading: false,
 			};
 		default:

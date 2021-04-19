@@ -15,6 +15,7 @@ const ProfilePage = ({
 	fetchProfileById,
 }) => {
 	useEffect(() => {
+		console.log("gp");
 		fetchProfileById(match.params.id);
 	}, [match.params.id]);
 
@@ -30,7 +31,7 @@ const ProfilePage = ({
 };
 
 const mapStateToProps = (state) => ({
-	profile: state.profile.profile,
+	profile: state.profile.guestProfile,
 	loading: state.profile.loading,
 	user_id: state.user.user_id,
 });

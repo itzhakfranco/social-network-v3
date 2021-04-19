@@ -21,7 +21,7 @@ export const fetchProfileById = (profileId) => async (dispatch) => {
 	const { data } = await http.get(`/profile/${profileId}`);
 
 	dispatch({
-		type: actionTypes.FETCH_EDUCATION_BY_ID_SUCCESS,
+		type: actionTypes.FETCH_PROFILE_BY_ID_SUCCESS,
 		payload: data,
 	});
 };

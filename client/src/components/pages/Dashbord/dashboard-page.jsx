@@ -46,9 +46,9 @@ class Dashboard extends Component {
 }
 const mapStateToProps = (state) => ({
 	name: state.user.name,
-	profile: state.profile.profile,
-	experience: state.profile?.profile?.experience,
-	education: state.profile?.profile?.education,
+	profile: state.profile.memberProfile,
+	experience: state.profile?.memberProfile?.experience,
+	education: state.profile?.memberProfile?.education,
 	loading: state.profile.loading,
 });
 

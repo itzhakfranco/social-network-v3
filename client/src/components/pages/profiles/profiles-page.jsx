@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from "react";
-//import PageHeader from "../../common/page-header";
+import PageHeader from "../../common/page-header";
 import { connect } from "react-redux";
 import PreLoader from "../../../utils/pre-loader";
 import ProfileItem from "./profile-item";
@@ -52,10 +52,10 @@ class Profiles extends Component {
 				<div className='container'>
 					<div className='row'>
 						<div className='col-lg-12 mb-4'>
-							{/* <PageHeader
-									title='Profiles Page'
-									desc='Here You can view all profiles'
-								/> */}
+							<PageHeader
+								title='Profiles Page'
+								desc='Here You can view all profiles'
+							/>
 						</div>
 					</div>
 					<SearchBar

@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-const MemberLinks = ({ currentUserProfileId, name, logout }) => (
+const MemberLinks = ({ profile, currentUserProfileId, name, logout }) => (
 	<>
 		<ul className='navbar-nav mr-auto'>
 			<li className='nav-item'>
@@ -29,7 +29,7 @@ const MemberLinks = ({ currentUserProfileId, name, logout }) => (
 				</NavLink>
 			</li>
 
-			{currentUserProfileId ? (
+			{profile?._id === currentUserProfileId ? (
 				<li className='nav-item'>
 					<NavLink
 						className='nav-link btn btn-secondary text-white mr-4'

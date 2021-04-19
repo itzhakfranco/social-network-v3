@@ -7,7 +7,7 @@ import { logout } from "../../../store/user/userActions";
 import GuestLinks from "./guest-links";
 import MembersLinks from "./member-links";
 
-const Navbar = ({ token, name, currentUserProfileId, logout }) => {
+const Navbar = ({ token, profile, name, currentUserProfileId, logout }) => {
 	return (
 		<nav className='navbar navbar-expand-lg navbar-light shadow-sm'>
 			<div className='container'>
@@ -28,6 +28,7 @@ const Navbar = ({ token, name, currentUserProfileId, logout }) => {
 						{token && (
 							<MembersLinks
 								currentUserProfileId={currentUserProfileId}
+								profile={profile}
 								name={name}
 								logout={logout}
 							/>

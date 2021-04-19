@@ -26,7 +26,11 @@ const Navbar = ({ token, profile, name, logout }) => {
 				<div className='collapse navbar-collapse' id='navbarSupportedContent'>
 					<>
 						{token && (
-							<MembersLinks profile={profile} name={name} logout={logout} />
+							<MembersLinks
+								hasProfile={profile ? true : false}
+								name={name}
+								logout={logout}
+							/>
 						)}
 						{!token && <GuestLinks />}
 					</>

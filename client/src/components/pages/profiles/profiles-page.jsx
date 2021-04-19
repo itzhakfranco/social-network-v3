@@ -25,6 +25,7 @@ class Profiles extends Component {
 	setSearchInput = (e) => {
 		if (e.target.value.length > 0) {
 			this.setState({ searchInput: e.target.value });
+			this.setSearchResults();
 		} else {
 			this.clearSearchResults();
 		}
@@ -65,14 +66,13 @@ class Profiles extends Component {
 						clearSearchResults={this.clearSearchResults}
 					/>
 					<div className='row'>
-						{this.state.searchResults &&
-							this.state.searchResults.map((profile) => (
-								<ProfileItem key={profile._id} profile={profile} />
-							))}
-						{!this.state.searchResults?.length > 0 &&
-							this.state.profiles.map((profile) => (
-								<ProfileItem key={profile._id} profile={profile} />
-							))}
+						{this.state.searchResults !== null
+							? this.state.searchResults.map((profile) => (
+									<ProfileItem key={profile._id} profile={profile} />
+							  ))
+							: this.state.profiles.map((profile) => (
+									<ProfileItem key={profile._id} profile={profile} />
+							  ))}
 
 						{!this.props.profiles && <h4>No profiles found...</h4>}
 					</div>

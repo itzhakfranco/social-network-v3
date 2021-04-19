@@ -7,7 +7,7 @@ import { logout } from "../../../store/user/userActions";
 import GuestLinks from "./guest-links";
 import MembersLinks from "./member-links";
 
-const Navbar = ({ token, name, profile, logout }) => {
+const Navbar = ({ token, name, currentUserProfileId, logout }) => {
 	return (
 		<nav className='navbar navbar-expand-lg navbar-light shadow-sm'>
 			<div className='container'>
@@ -26,7 +26,11 @@ const Navbar = ({ token, name, profile, logout }) => {
 				<div className='collapse navbar-collapse' id='navbarSupportedContent'>
 					<>
 						{token && (
-							<MembersLinks profile={profile} name={name} logout={logout} />
+							<MembersLinks
+								currentUserProfileId={currentUserProfileId}
+								name={name}
+								logout={logout}
+							/>
 						)}
 						{!token && <GuestLinks />}
 					</>
@@ -40,6 +44,7 @@ const mapStateToProps = (state) => ({
 	token: state.user.token,
 	name: state.user.name,
 	profile: state.profile.profile,
+	currentUserProfileId: state.profile.currentUserProfileId,
 });
 
 export default connect(mapStateToProps, { logout })(Navbar);

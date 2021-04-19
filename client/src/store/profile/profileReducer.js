@@ -2,6 +2,7 @@ import * as actionTypes from "./profileType";
 
 const intialState = {
 	profile: null,
+	currentUserProfileId: null,
 	loading: false,
 };
 
@@ -27,6 +28,7 @@ const profileReducer = (state = intialState, action) => {
 			return {
 				...state,
 				profile: action.payload,
+				currentUserProfileId: action.payload._id,
 				loading: false,
 			};
 		case actionTypes.FETCH_PROFILE_BY_ID_REQUEST:

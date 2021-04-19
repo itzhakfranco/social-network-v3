@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-const MemberLinks = ({ has_profile, name, logout }) => (
+const MemberLinks = ({ profile, name, logout }) => (
 	<>
 		<ul className='navbar-nav mr-auto'>
 			<li className='nav-item'>
@@ -29,11 +29,11 @@ const MemberLinks = ({ has_profile, name, logout }) => (
 				</NavLink>
 			</li>
 
-			{has_profile ? (
+			{profile ? (
 				<li className='nav-item'>
 					<NavLink
 						className='nav-link btn btn-secondary text-white mr-4'
-						to={"/user/profile/"}
+						to={`/profiles/${profile._id}`}
 					>
 						<i className='far fa-user mx-1'></i>
 						{`${name} Profile`}

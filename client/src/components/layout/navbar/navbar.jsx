@@ -26,11 +26,7 @@ const Navbar = ({ token, name, profile, logout }) => {
 				<div className='collapse navbar-collapse' id='navbarSupportedContent'>
 					<>
 						{token && (
-							<MembersLinks
-								has_profile={profile ? true : false}
-								name={name}
-								logout={logout}
-							/>
+							<MembersLinks profile={profile} name={name} logout={logout} />
 						)}
 						{!token && <GuestLinks />}
 					</>

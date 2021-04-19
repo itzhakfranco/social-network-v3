@@ -29,6 +29,18 @@ const profileReducer = (state = intialState, action) => {
 				profile: action.payload,
 				loading: false,
 			};
+		case actionTypes.FETCH_PROFILE_BY_ID_REQUEST:
+			return {
+				...state,
+				loading: true,
+			};
+		case actionTypes.FETCH_PROFILE_BY_ID_SUCCESS:
+			return {
+				...state,
+				profile: action.payload,
+				loading: false,
+			};
+
 		case actionTypes.UPDATE_PROFILE_REQUEST:
 			return {
 				...state,

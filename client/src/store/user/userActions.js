@@ -1,5 +1,4 @@
 import http from "../../services/httpService";
-import { apiUrl } from "../../config.json";
 
 import {
 	REGISTER_REQUEST,
@@ -16,7 +15,7 @@ export const signup = (formData) => async (dispatch) => {
 		type: REGISTER_REQUEST,
 	});
 	try {
-		const { data } = await http.post(`${apiUrl}/users`, formData);
+		const { data } = await http.post("/users", formData);
 		dispatch({
 			type: REGISTER_SUCCESS,
 			payload: data,
@@ -35,7 +34,7 @@ export const signin = (email, password) => async (dispatch) => {
 	});
 
 	try {
-		const { data } = await http.post(`${apiUrl}/auth`, { email, password });
+		const { data } = await http.post("/auth", { email, password });
 		dispatch({
 			type: LOGIN_SUCCESS,
 			payload: data,

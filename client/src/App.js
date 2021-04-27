@@ -16,7 +16,7 @@ import MemberPofilePage from "./components/pages/Profile/member-profile-page";
 import PostsPage from "./components/pages/Posts/posts-page";
 import HomePage from "./components/pages/HomePage/home-page";
 
-import ProfilesPage from "./components/pages/Profiles/profiles-page";
+//import ProfilesPage from "./components/pages/Profiles/profiles-page";
 import { ToastContainer } from "react-toastify";
 
 function App() {
@@ -39,8 +39,8 @@ function App() {
 					<ProtectedRoute path='/user/create-profile' component={ProfileForm} />
 					<ProtectedRoute path='/posts' component={PostsPage} />
 					<ProtectedRoute path='/profiles/:id' component={GuestPofilePage} />
-					<ProtectedRoute path='/profiles' component={ProfilesPage} />
-
+					{/* 					<ProtectedRoute path='/profiles' component={ProfilesPage} />
+					 */}
 					<ProtectedRoute
 						path='/user/experience/edit/:id'
 						component={ExperienceForm}

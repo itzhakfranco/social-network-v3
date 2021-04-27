@@ -1,7 +1,6 @@
 import React, { Fragment, Component } from "react";
 import PageHeader from "../../common/page-header";
 import { connect } from "react-redux";
-import PreLoader from "../../../utils/pre-loader";
 import ProfileItem from "./profile-item";
 import { fetchAllProfiles } from "../../../store/profiles/profilesActions";
 import SearchBar from "./search-bar";

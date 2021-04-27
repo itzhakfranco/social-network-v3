@@ -6,7 +6,7 @@ import ProfileItem from "./profile-item";
 import { fetchAllProfiles } from "../../../store/profiles/profilesActions";
 import SearchBar from "./search-bar";
 
-class Profiles extends Component {
+class ProfilesPage extends Component {
 	state = {
 		profiles: [],
 		searchInput: null,
@@ -86,4 +86,4 @@ const mapStateToProps = (state) => ({
 	profiles: state.profiles.profiles,
 });
 
-export default connect(mapStateToProps, { fetchAllProfiles })(Profiles);
+export default connect(mapStateToProps, { fetchAllProfiles })(ProfilesPage);

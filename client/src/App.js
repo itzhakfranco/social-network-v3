@@ -1,4 +1,6 @@
 import Navbar from "./components/layout/navbar/navbar.jsx";
+
+import "./App.css";
 import { Route, Switch } from "react-router-dom";
 
 import ProtectedRoute from "./components/common/protectedRoute";
@@ -12,7 +14,8 @@ import ProfileForm from "./components/forms/profile/profile-form";
 import GuestPofilePage from "./components/pages/Profile/guest-profile-page";
 import MemberPofilePage from "./components/pages/Profile/member-profile-page";
 import PostsPage from "./components/pages/Posts/posts-page";
-import ProfilesPage from "./components/pages/profiles/profiles-page";
+import ProfilesPage from "./components/pages/Profiles/profiles-page";
+import HomePage from "./components/pages/HomePage/home-page";
 
 import { ToastContainer } from "react-toastify";
 
@@ -59,6 +62,7 @@ function App() {
 						path='/user/profile/edit/:id'
 						component={ProfileForm}
 					/>
+					<Route path='/' component={HomePage} />
 				</Switch>
 			</main>
 			<footer></footer>

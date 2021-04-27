@@ -1,9 +1,10 @@
 import {
 	REGISTER_REQUEST,
 	REGISTER_SUCCESS,
-	REGISTER_FAIL,
+	REGISTER_FAILED,
 	LOGIN_REQUEST,
 	LOGIN_SUCCESS,
+	LOGIN_FAILED,
 	LOGOUT,
 } from "./userTypes";
 
@@ -14,6 +15,7 @@ const intialState = {
 	user_id: null,
 	name: "",
 	loading: false,
+	error: null,
 };
 
 const userReducer = (state = intialState, action) => {
@@ -48,8 +50,14 @@ const userReducer = (state = intialState, action) => {
 				name: payload.name,
 				loading: false,
 			};
+		case LOGIN_FAILED:
+		case REGISTER_FAILED:
+			return {
+				...state,
+				error: payload,
+				loading: false,
+			};
 		case LOGOUT:
-		case REGISTER_FAIL:
 			localStorage.removeItem("token");
 			return {
 				token: null,

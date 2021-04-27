@@ -4,9 +4,10 @@ import { apiUrl } from "../../config.json";
 import {
 	REGISTER_REQUEST,
 	REGISTER_SUCCESS,
-	REGISTER_FAIL,
+	REGISTER_FAILED,
 	LOGIN_REQUEST,
 	LOGIN_SUCCESS,
+	LOGIN_FAILED,
 	LOGOUT,
 } from "./userTypes";
 
@@ -14,22 +15,37 @@ export const signup = (formData) => async (dispatch) => {
 	dispatch({
 		type: REGISTER_REQUEST,
 	});
-	const { data } = await http.post(`${apiUrl}/users`, formData);
-	dispatch({
-		type: REGISTER_SUCCESS,
-		payload: data,
-	});
+	try {
+		const { data } = await http.post(`${apiUrl}/users`, formData);
+		dispatch({
+			type: REGISTER_SUCCESS,
+			payload: data,
+		});
+	} catch (err) {
+		dispatch({
+			type: REGISTER_FAILED,
+			payload: err.response.data,
+		});
+	}
 };
 
 export const signin = (email, password) => async (dispatch) => {
 	dispatch({
 		type: LOGIN_REQUEST,
 	});
-	const { data } = await http.post(`${apiUrl}/auth`, { email, password });
-	dispatch({
-		type: LOGIN_SUCCESS,
-		payload: data,
-	});
+
+	try {
+		const { data } = await http.post(`${apiUrl}/auth`, { email, password });
+		dispatch({
+			type: LOGIN_SUCCESS,
+			payload: data,
+		});
+	} catch (err) {
+		dispatch({
+			type: LOGIN_FAILED,
+			payload: err.response.data,
+		});
+	}
 };
 
 export const logout = () => (dispatch) => {

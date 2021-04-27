@@ -20,17 +20,16 @@ class Signin extends Form {
 		password: Joi.string().required().min(6).label("Password"),
 	};
 
+	componentDidUpdate(previousProps) {
+		if (previousProps.error !== this.props.error) {
+			this.setState({ errors: { email: this.props.error } });
+		}
+	}
+
 	doSubmit = () => {
 		const { signin } = this.props;
 		const { email, password } = this.state.data;
-		try {
-			signin(email, password);
-			toast("Welcome Back", { position: "top-center" });
-		} catch (ex) {
-			if (ex.response && ex.response.status === 400) {
-				this.setState({ errors: { email: ex.response.data } });
-			}
-		}
+		signin(email, password);
 	};
 
 	render() {
@@ -78,6 +77,7 @@ class Signin extends Form {
 const mapStateToProps = (state) => ({
 	token: state.user.token,
 	loading: state.user.loading,
+	error: state.user.error,
 });
 
 export default connect(mapStateToProps, { signin })(Signin);

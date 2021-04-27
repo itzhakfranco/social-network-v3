@@ -19,17 +19,16 @@ class Signup extends Form {
 		password: Joi.string().required().min(6).label("Password"),
 	};
 
-	doSubmit = async () => {
+	componentDidUpdate(previousProps) {
+		if (previousProps.error !== this.props.error) {
+			this.setState({ errors: { email: this.props.error } });
+		}
+	}
+
+	doSubmit = () => {
 		const data = { ...this.state.data };
 		const { signup } = this.props;
-		try {
-			await signup(data);
-			toast(`Awesome ${data.name}! your account has been created.`);
-		} catch (err) {
-			if (err.response && err.response.status === 400) {
-				this.setState({ errors: { email: "Email is taken" } });
-			}
-		}
+		signup(data);
 	};
 
 	render() {
@@ -76,6 +75,7 @@ class Signup extends Form {
 const mapStateToProps = (state) => ({
 	token: state.user.token,
 	loading: state.user.loading,
+	error: state.user.error,
 });
 
 export default connect(mapStateToProps, { signup })(Signup);

@@ -27,7 +27,7 @@ class ProfilePage extends Component {
 	render() {
 		const { profile, loading, user_id } = this.props;
 
-		return loading ? (
+		return !profile ? (
 			<PreLoader />
 		) : (
 			<div className='container'>

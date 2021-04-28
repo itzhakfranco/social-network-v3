@@ -15,18 +15,20 @@ const GuestProfilePage = ({
 }) => {
 	useEffect(() => {
 		fetchProfileById(match.params.id);
-		console.log(match);
-	}, [match.params.id, match]);
+		console.log(loading);
+		console.log(profile);
+	}, [match.params.id, match, loading, profile]);
 
 	return loading && profile ? (
 		<PreLoader />
 	) : (
-		<div className='container'>
+		<h1>hi</h1>
+		/* 		<div className='container'>
 			<ProfilleActions profile={profile} user_id={user_id} />
 			<ProfileHeader profile={profile} />
 			<ExperienceSection experience={profile?.experience} />
 			<EducationSection education={profile?.education} />
-		</div>
+		</div> */
 	);
 };
 
@@ -37,4 +39,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { fetchProfileById })(GuestProfilePage);
+
+
 

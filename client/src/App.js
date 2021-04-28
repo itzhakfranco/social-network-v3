@@ -11,8 +11,8 @@ import Dashboard from "./components/pages/Dashbord/dashboard-page";
 import ExperienceForm from "./components/forms/profile/experience-form";
 import EducationForm from "./components/forms/profile/education-form";
 import ProfileForm from "./components/forms/profile/profile-form";
-import GuestPofilePage from "./components/pages/Profile/guest-profile-page";
-import MemberPofilePage from "./components/pages/Profile/member-profile-page";
+import GuestProfilePage from "./components/pages/Profile/guest-profile-page";
+import MemberProfilePage from "./components/pages/Profile/member-profile-page";
 import PostsPage from "./components/pages/Posts/posts-page";
 import HomePage from "./components/pages/HomePage/home-page";
 
@@ -33,12 +33,12 @@ function App() {
 					<ProtectedRoute
 						exact
 						path='/user/profile/'
-						component={MemberPofilePage}
+						component={MemberProfilePage}
 					/>
 					<ProtectedRoute path='/user/dashboard' component={Dashboard} />
 					<ProtectedRoute path='/user/create-profile' component={ProfileForm} />
 					<ProtectedRoute path='/posts' component={PostsPage} />
-					<ProtectedRoute path='/profiles/:id' component={GuestPofilePage} />
+					<ProtectedRoute path='/profiles/:id' component={GuestProfilePage} />
 					<ProtectedRoute path='/profiles' component={ProfilesPage} />
 					
 					<ProtectedRoute

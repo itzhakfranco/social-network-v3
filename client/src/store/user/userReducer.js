@@ -27,6 +27,7 @@ const userReducer = (state = intialState, action) => {
 				loading: true,
 			};
 		case REGISTER_SUCCESS:
+			axios.defaults.headers["x-auth-token"] = payload.token;
 			localStorage.setItem("token", payload.token);
 
 			return {

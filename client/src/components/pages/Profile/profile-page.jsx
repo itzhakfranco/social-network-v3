@@ -24,7 +24,7 @@ const GuestProfilePage = ({
 		} else {
 			fetchUserProfile();
 		}
-	}, [match.params.id]);
+	}, [match.params.id,fetchProfileById,fetchUserProfile]);
 
 	return loading ? (
 		<PreLoader />

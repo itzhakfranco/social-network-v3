@@ -18,18 +18,15 @@ const GuestProfilePage = ({
 		console.log(match);
 	}, [match.params.id, match]);
 
-	return loading ? (
+	return loading && profile ? (
 		<PreLoader />
-	) : (
-		<h1>hi</h1>
-		/* 	<PreLoader />
 	) : (
 		<div className='container'>
 			<ProfilleActions profile={profile} user_id={user_id} />
 			<ProfileHeader profile={profile} />
 			<ExperienceSection experience={profile?.experience} />
 			<EducationSection education={profile?.education} />
-		</div> */
+		</div>
 	);
 };
 
@@ -40,3 +37,4 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { fetchProfileById })(GuestProfilePage);
+

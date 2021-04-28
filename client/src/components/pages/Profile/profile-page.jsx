@@ -10,7 +10,7 @@ import ProfilleActions from "./profile-actions";
 import ExperienceSection from "./experience-section";
 import EducationSection from "./education-section";
 
-class PofilePage extends Component {
+class ProfilePage extends Component {
 	componentDidMount() {
 		if (this.props.params.id) {
 			this.props.fetchProfileById(this.props.match.params.id);
@@ -47,6 +47,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { fetchProfileById, fetchUserProfile })(
-	PofilePage
+	ProfilePage
 );
 

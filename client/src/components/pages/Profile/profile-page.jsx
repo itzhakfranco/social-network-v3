@@ -26,15 +26,16 @@ const ProfilePage = ({
 		}
 	}, [match.params.id, fetchProfileById, fetchUserProfile]);
 
-	return loading ? <PreLoader /> : <h1>hi</h1>;
-	{
-		/* <div className='container'>
+	return loading && !profile ? (
+		<PreLoader />
+	) : (
+		<div className='container'>
 			<ProfilleActions profile={profile} user_id={user_id} />
 			<ProfileHeader profile={profile} />
 			<ExperienceSection experience={profile?.experience} />
 			<EducationSection education={profile?.education} />
-		</div> */
-	}
+		</div>
+	);
 };
 
 const mapStateToProps = (state) => ({
@@ -46,4 +47,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, { fetchProfileById, fetchUserProfile })(
 	ProfilePage
 );
+
 

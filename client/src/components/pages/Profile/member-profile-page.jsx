@@ -7,7 +7,7 @@ import ProfilleActions from "./profile-actions";
 import ExperienceSection from "./experience-section";
 import EducationSection from "./education-section";
 
-class MemberPofilePage extends Component {
+class MemberProfilePage extends Component {
 	componentDidMount() {
 		!this.props.profile && this.props.fetchUserProfile();
 	}
@@ -31,4 +31,4 @@ const mapStateToProps = (state) => ({
 	user_id: state.user.user_id,
 });
 
-export default connect(mapStateToProps, { fetchUserProfile })(MemberPofilePage);
+export default connect(mapStateToProps, { fetchUserProfile })(MemberProfilePage);

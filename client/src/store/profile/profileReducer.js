@@ -3,7 +3,7 @@ import * as actionTypes from "./profileType";
 const intialState = {
 	guestProfile: null,
 	memberProfile: null,
-	loading: true,
+	loading: false,
 };
 
 const profileReducer = (state = intialState, action) => {

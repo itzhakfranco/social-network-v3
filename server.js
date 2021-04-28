@@ -8,10 +8,10 @@ connectDB();
 
 app.use(express.json());
 //app.use(cors());
-app.use("/api/auth/", require("./routes/auth"));
-app.use("/api/users/", require("./routes/users"));
-app.use("/api/posts/", require("./routes/posts"));
-app.use("/api/profile/", require("./routes/profile"));
+app.use("/auth/", require("./routes/auth"));
+app.use("/users/", require("./routes/users"));
+app.use("/posts/", require("./routes/posts"));
+app.use("/profile/", require("./routes/profile"));
 
 if (process.env.NODE_ENV === "production") {
 	app.use(express.static(path.resolve(__dirname, "client/build")));

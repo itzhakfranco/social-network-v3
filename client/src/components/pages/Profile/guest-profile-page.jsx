@@ -6,6 +6,7 @@ import ProfileHeader from "./profile-header";
 import ProfilleActions from "./profile-actions";
 import ExperienceSection from "./experience-section";
 import EducationSection from "./education-section";
+
 const GuestProfilePage = ({
 	fetchProfileById,
 	match,
@@ -15,20 +16,18 @@ const GuestProfilePage = ({
 }) => {
 	useEffect(() => {
 		fetchProfileById(match.params.id);
-		console.log(loading);
 		console.log(profile);
 	}, [match.params.id]);
 
-	return loading && profile ? (
+	return loading ? (
 		<PreLoader />
 	) : (
-		<h1>hi</h1>
-		/* 		<div className='container'>
+		<div className='container'>
 			<ProfilleActions profile={profile} user_id={user_id} />
 			<ProfileHeader profile={profile} />
 			<ExperienceSection experience={profile?.experience} />
 			<EducationSection education={profile?.education} />
-		</div> */
+		</div>
 	);
 };
 

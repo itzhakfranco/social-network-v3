@@ -23,7 +23,11 @@ router.post("/", async (req, res) => {
 		user.password = await bcrypt.hash(password, salt);
 		await user.save();
 
-		res.json({ token: user.generateAuthToken(), name: user.name });
+	res.json({
+		token: user.generateAuthToken(),
+		user_id: user._id,
+		name: user.name,
+	});
 	} catch (err) {
 		console.error(err.message);
 		res.status(500).send("Server Error");

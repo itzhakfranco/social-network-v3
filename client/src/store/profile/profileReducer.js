@@ -50,7 +50,7 @@ const profileReducer = (state = intialState, action) => {
 		case actionTypes.UPDATE_PROFILE_SUCCESS:
 			return {
 				...state,
-				memProfile: action.payload,
+				memberProfile: action.payload,
 				loading: false,
 			};
 		case actionTypes.FETCH_PROFILE_FAILED:

@@ -9,7 +9,7 @@ import EducationSection from "./education-section";
 
 class ProfilePage extends Component {
 	componentDidMount() {
-		!this.props.profile && this.props.fetchUserProfile();
+		 this.props.fetchUserProfile();
 	}
 	render() {
 		const { profile, loading, user_id } = this.props;

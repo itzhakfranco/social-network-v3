@@ -17,7 +17,7 @@ const GuestProfilePage = ({
 		fetchProfileById(match.params.id);
 		console.log(loading);
 		console.log(profile);
-	}, [match.params.id, profile]);
+	}, [match.params.id]);
 
 	return loading && profile ? (
 		<PreLoader />

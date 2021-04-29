@@ -5,10 +5,22 @@ export const fetchPosts = () => async (dispatch) => {
 	dispatch({
 		type: actionTypes.FETCH_POSTS_REQUEST,
 	});
-	const { data } = await http.post("/posts");
+	const { data } = await http.get("/posts");
 
 	dispatch({
 		type: actionTypes.FETCH_POSTS_SUCCESS,
+		payload: data,
+	});
+};
+
+export const addPost = (formData) => async (dispatch) => {
+	dispatch({
+		type: actionTypes.ADD_POST_REQUEST,
+	});
+	const { data } = await http.post("/posts", formData);
+
+	dispatch({
+		type: actionTypes.ADD_POST_SUCCESS,
 		payload: data,
 	});
 };

@@ -16,8 +16,9 @@ import GuestProfilePage from "./components/pages/Profile/guest-profile-page";
 import MemberProfilePage from "./components/pages/Profile/member-profile-page";
 import PostsPage from "./components/pages/Posts/posts-page";
 import HomePage from "./components/pages/HomePage/home-page";
-
 import ProfilesPage from "./components/pages/Profiles/profiles-page";
+import AddPost from "./components/pages/Posts/add-post";
+
 import { ToastContainer } from "react-toastify";
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
 				<Switch>
 					<Route path='/user/signup' component={Signup} />
 					<Route path='/user/signin' component={Signin} />
+					<Route path='/add-post' component={AddPost} />
 					<ProtectedRoute
 						exact
 						path='/user/profile/'

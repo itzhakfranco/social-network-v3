@@ -1,4 +1,4 @@
-import * as actionTypes from "./profileType";
+import * as actionTypes from "./postsType";
 
 const intialState = {
 	posts: null,
@@ -8,6 +8,7 @@ const intialState = {
 const postsReducer = (state = intialState, action) => {
 	switch (action.type) {
 		case actionTypes.FETCH_POSTS_REQUEST:
+		case actionTypes.ADD_POST_REQUEST:
 			return {
 				...state,
 				loading: true,
@@ -16,6 +17,12 @@ const postsReducer = (state = intialState, action) => {
 			return {
 				...state,
 				posts: action.payload,
+				loading: false,
+			};
+		case actionTypes.ADD_POST_SUCCESS:
+			return {
+				...state,
+				posts: [action.payload, ...state.posts],
 				loading: false,
 			};
 

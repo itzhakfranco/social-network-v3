@@ -23,7 +23,7 @@ const MemberLinks = ({ hasProfile, name, logout }) => (
 			<li className='nav-item'>
 				<NavLink
 					className='btn btn-primary nav-link text-white mr-4'
-					to='/user/add-post'
+					to='/add-post'
 				>
 					<i className='fas fa-plus-circle mx-1'></i>Add Post
 				</NavLink>

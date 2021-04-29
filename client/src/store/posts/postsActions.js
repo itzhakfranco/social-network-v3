@@ -11,6 +11,8 @@ export const fetchPosts = () => async (dispatch) => {
 		type: actionTypes.FETCH_POSTS_SUCCESS,
 		payload: data,
 	});
+
+	return data;
 };
 
 export const addPost = (formData) => async (dispatch) => {
@@ -22,5 +24,15 @@ export const addPost = (formData) => async (dispatch) => {
 	dispatch({
 		type: actionTypes.ADD_POST_SUCCESS,
 		payload: data,
+	});
+};
+export const deletePost = (postId) => async (dispatch) => {
+	dispatch({
+		type: actionTypes.DELETE_POST_REQUEST,
+	});
+	await http.delete(`/posts/${postId}`);
+
+	dispatch({
+		type: actionTypes.DELETE_POST_SUCCESS,
 	});
 };

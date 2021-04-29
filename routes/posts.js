@@ -5,7 +5,9 @@ const auth = require("../middleware/auth");
 const User = require("../models/User");
 
 router.get("/", async (req, res) => {
-	const posts = await Post.find().sort({ date: -1 }).populate("user", "name");
+	const posts = await Post.find()
+		.sort({ date: -1 })
+		.populate("user_id", "name");
 	res.json(posts);
 });
 
@@ -21,20 +23,15 @@ router.post("/", auth, async (req, res) => {
 });
 
 router.delete("/:id", auth, async (req, res) => {
-	try {
-		const post = await Post.findById(req.params.id);
-		if (!post) return res.status(404).send("Post not found");
+	const post = await Post.findById(req.params.id);
+	if (!post) return res.status(404).send("Invalid Post Id");
 
-		if (post.user.toString() !== req.user.id)
-			return res.status(404).send("Invalid Credentials");
+	if (post.user_id.toString() !== req.user.id)
+		return res.status(404).send("Invalid Credentials");
 
-		await post.remove();
+	post.remove();
 
-		return res.json({});
-	} catch (err) {
-		console.error(err.message);
-		return res.status(500).send("Server Error");
-	}
+	res.status(204).json({});
 });
 
 router.post("/comment/:id", auth, async (req, res) => {

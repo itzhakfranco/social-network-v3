@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import { swalConfirmDelete } from "../../../config.json";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
-//import { deletePost } from "../../actions/post";
+import { deletePost } from "../../../store/posts/postsActions";
 //import PostFooter from "./post-footer";
 
-const PostItem = ({ post, auth, deletePost, handlePostDelete }) => {
+const PostItem = ({ post, userId, deletePost, setPosts, posts }) => {
 	const onDelete = async (e, postId) => {
 		e.preventDefault();
 		const result = await Swal.fire(swalConfirmDelete);
@@ -17,6 +17,11 @@ const PostItem = ({ post, auth, deletePost, handlePostDelete }) => {
 			deletePost(postId);
 			toast("Post was deleted successfully");
 		}
+	};
+
+	const handlePostDelete = (postId) => {
+		const test = posts.filter((post) => post._id !== postId);
+		setPosts(test);
 	};
 
 	return (
@@ -35,8 +40,10 @@ const PostItem = ({ post, auth, deletePost, handlePostDelete }) => {
 								/>
 							</div>
 							<div className='flex-grow-1 pl-2'>
-								<Link to={`/profiles/${post.user_id}`}>
-									<h2 className='text-capitalize h5 mb-0'>{post.name} </h2>
+								<Link to={`/profiles/${post.user_id._id}`}>
+									<h2 className='text-capitalize h5 mb-0'>
+										{post.user_id.name}{" "}
+									</h2>
 								</Link>
 
 								<p className='small text-secondary m-0 mt-1'>
@@ -44,28 +51,29 @@ const PostItem = ({ post, auth, deletePost, handlePostDelete }) => {
 									<Moment format='DD/MM/YY'>{post.date}</Moment>
 								</p>
 							</div>
-
-							<div className='dropdown float-right'>
-								<Link
-									className='dropdown-toggle no-underline'
-									to='#'
-									id='dropdownMenuLink'
-									data-toggle='dropdown'
-								>
-									<i className='fas fa-ellipsis-h'></i>
-								</Link>
-								<div className='dropdown-menu dropdown-menu-right'>
-									<button
-										className='dropdown-item delete-post-btn'
-										type='button'
-										onClick={(e) => {
-											onDelete(e, post._id);
-										}}
+							{userId === post.user_id._id && (
+								<div className='dropdown float-right'>
+									<Link
+										className='dropdown-toggle no-underline'
+										to='#'
+										id='dropdownMenuLink'
+										data-toggle='dropdown'
 									>
-										<i className='fas fa-eraser'></i> Delete
-									</button>
+										<i className='fas fa-ellipsis-h'></i>
+									</Link>
+									<div className='dropdown-menu dropdown-menu-right'>
+										<button
+											className='dropdown-item delete-post-btn'
+											type='button'
+											onClick={(e) => {
+												onDelete(e, post._id);
+											}}
+										>
+											<i className='fas fa-eraser'></i> Delete
+										</button>
+									</div>
 								</div>
-							</div>
+							)}
 						</div>
 
 						<div className='mt-2'>
@@ -79,9 +87,4 @@ const PostItem = ({ post, auth, deletePost, handlePostDelete }) => {
 	);
 };
 
-const mapStateToProps = (state) => ({
-	auth: state.auth,
-	profile: state.profile,
-});
-
-export default connect(mapStateToProps, {})(PostItem);
+export default connect(null, { deletePost })(PostItem);

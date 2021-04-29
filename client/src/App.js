@@ -12,7 +12,8 @@ import ExperienceForm from "./components/forms/profile/experience-form";
 import EducationForm from "./components/forms/profile/education-form";
 import ProfileForm from "./components/forms/profile/profile-form";
 
-import ProfilePage from "./components/pages/Profile/profile-page.jsx";
+import GuestProfilePage from "./components/pages/Profile/guest-profile-page";
+import MemberProfilePage from "./components/pages/Profile/member-profile-page";
 import PostsPage from "./components/pages/Posts/posts-page";
 import HomePage from "./components/pages/HomePage/home-page";
 
@@ -30,11 +31,15 @@ function App() {
 				<Switch>
 					<Route path='/user/signup' component={Signup} />
 					<Route path='/user/signin' component={Signin} />
-					<ProtectedRoute exact path='/user/profile/' component={ProfilePage} />
+					<ProtectedRoute
+						exact
+						path='/user/profile/'
+						component={MemberProfilePage}
+					/>
 					<ProtectedRoute path='/user/dashboard' component={Dashboard} />
 					<ProtectedRoute path='/user/create-profile' component={ProfileForm} />
 					<ProtectedRoute path='/posts' component={PostsPage} />
-					<ProtectedRoute path='/profiles/:id' component={ProfilePage} />
+					<ProtectedRoute path='/profiles/:id' component={GuestProfilePage} />
 					<ProtectedRoute path='/profiles' component={ProfilesPage} />
 
 					<ProtectedRoute
@@ -67,4 +72,3 @@ function App() {
 }
 
 export default App;
-

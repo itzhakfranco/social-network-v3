@@ -31,16 +31,6 @@ const ProfileSearchBar = ({
 							onChange={setSearchInput}
 							value={searchInput}
 						/>
-						<div className='input-group-append'>
-							<button
-								className='btn btn-primary'
-								type='button'
-								onClick={setSearchResults}
-								disabled={searchInput !== "" ? false : true}
-							>
-								Search
-							</button>
-						</div>
 					</div>
 				</div>
 			</div>

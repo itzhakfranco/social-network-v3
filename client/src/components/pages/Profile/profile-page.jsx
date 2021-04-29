@@ -10,6 +10,8 @@ import ProfilleActions from "./profile-actions";
 import ExperienceSection from "./experience-section";
 import EducationSection from "./education-section";
 
+import PageHeader from "../../common/page-header";
+
 const ProfilePage = ({
 	fetchProfileById,
 	fetchUserProfile,
@@ -26,15 +28,22 @@ const ProfilePage = ({
 		}
 	}, [match.params.id, fetchProfileById, fetchUserProfile]);
 
-	return loading && !profile ? (
+	return loading ? (
 		<PreLoader />
 	) : (
-		<div className='container'>
-			<ProfilleActions profile={profile} user_id={user_id} />
-			<ProfileHeader profile={profile} />
-			<ExperienceSection experience={profile?.experience} />
-			<EducationSection education={profile?.education} />
-		</div>
+		<>
+			<div className='container'>
+				<PageHeader title='title' desc='desc' />
+			</div>
+			{profile && (
+				<div className='container'>
+					<ProfilleActions profile={profile} user_id={user_id} />
+					<ProfileHeader profile={profile} />
+					<ExperienceSection experience={profile?.experience} />
+					<EducationSection education={profile?.education} />
+				</div>
+			)}
+		</>
 	);
 };
 
@@ -47,5 +56,3 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, { fetchProfileById, fetchUserProfile })(
 	ProfilePage
 );
-
-

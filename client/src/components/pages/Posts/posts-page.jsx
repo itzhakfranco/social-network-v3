@@ -1,22 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
+import PageHeader from "../../common/page-header";
 
 const PostsPage = () => {
-	return (
-		<div>
-			<div className='container'>
-				<div class='row'>
-					<div class='col-lg-12 mb-4'>
-						<div class='card mt-4'>
-							<div class='card-body'>
-								<h5 class='card-title text-center'>Posts Page</h5>
-								<p class='card-text text-center'>Here You can view all posts</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+	const [posts, setPosts] = useState(null);
+	const [isFiltered, setIsFiltered] = useState(false);
+	const [isSorted, setIsSorted] = useState(true);
+
+	useEffect(() => {
+		fetchPosts();
+	}, []);
+
+	return <PageHeader title='Posts Page' desc='Here You can view all posts' />;
 };
 
-export default PostsPage;
+export default connect(mapStateToProps, { fetchPosts })(PostsPage);

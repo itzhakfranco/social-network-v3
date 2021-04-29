@@ -4,6 +4,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import userReducer from "./user/userReducer";
 import profileReducer from "./profile/profileReducer";
 import profilesReducer from "./profiles/profilesReducer";
+import postsReducer from "./posts/postsReducer";
 
 const composeEnhancers = composeWithDevTools({});
 
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
 	user: userReducer,
 	profile: profileReducer,
 	profiles: profilesReducer,
+	posts: postsReducer,
 });
 
 const loadState = () => {

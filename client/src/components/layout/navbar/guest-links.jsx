@@ -8,11 +8,7 @@ const GuestLinks = () => (
 					<i className='fas fa-users mx-2 '></i>Profiles
 				</NavLink>
 			</li>
-			<li className='nav-item'>
-				<NavLink className='nav-link btn text-dark' to='/posts'>
-					<i className='fas fa-clipboard mx-2 '></i>Posts
-				</NavLink>
-			</li>
+		
 		</ul>
 		<ul className='navbar-nav ml-auto'>
 			<li className='nav-item'>

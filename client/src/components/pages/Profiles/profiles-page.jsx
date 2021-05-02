@@ -1,6 +1,7 @@
 import React, { Fragment, Component } from "react";
-import PageHeader from "../../common/page-header";
 import { connect } from "react-redux";
+import PageHeader from "../../common/page-header";
+import PreLoader from "../../../utils/pre-loader";
 import ProfileItem from "./profile-item";
 import { fetchAllProfiles } from "../../../store/profiles/profilesActions";
 import SearchBar from "./search-bar";
@@ -46,6 +47,8 @@ class ProfilesPage extends Component {
 	};
 
 	render() {
+		if (this.props.loading) return <PreLoader />;
+
 		return (
 			<Fragment>
 				<div className='container'>
@@ -83,6 +86,8 @@ class ProfilesPage extends Component {
 
 const mapStateToProps = (state) => ({
 	profiles: state.profiles.profiles,
+	loading: state.profiles.loading,
 });
 
 export default connect(mapStateToProps, { fetchAllProfiles })(ProfilesPage);
+

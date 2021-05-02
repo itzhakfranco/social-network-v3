@@ -4,14 +4,12 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import PostItem from "./post-item";
 import PageHeader from "../../common/page-header";
-import FilterButton from "./filter-button";
+import SortFilterButton from "./sort-filter-button";
 
 import { fetchPosts } from "../../../store/posts/postsActions";
 
 const PostsPage = ({ fetchPosts, userId }) => {
 	const [posts, setPosts] = useState([]);
-	const [isFiltered, setIsFiltered] = useState(false);
-	const [isSorted, setIsSorted] = useState(true);
 
 	useEffect(() => {
 		async function fetchData() {
@@ -30,12 +28,12 @@ const PostsPage = ({ fetchPosts, userId }) => {
 			</div>
 			<div className='row'>
 				<div className='col-md-4 m-auto text-center'>
-					<Link className='btn btn-success px-5' to='/user/add-post'>
+					<Link className='btn btn-success px-5 mt-5' to='/user/add-post'>
 						<i className='fas fa-plus-circle mx-1'></i> Add Post
 					</Link>
 				</div>
 				<div className='col-md-4 mr-auto'>
-					<FilterButton posts={posts} setPosts={setPosts} />
+					<SortFilterButton posts={posts} setPosts={setPosts} />
 				</div>
 			</div>
 			{posts?.length > 0 && (

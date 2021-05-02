@@ -27,12 +27,12 @@ const PostsPage = ({ fetchPosts, userId }) => {
 				</div>
 			</div>
 			<div className='row'>
-				<div className='col-md-4 m-auto text-center'>
+				<div className='col-sm-6'>
 					<Link className='btn btn-success px-5 mt-5' to='/user/add-post'>
 						<i className='fas fa-plus-circle mx-1'></i> Add Post
 					</Link>
 				</div>
-				<div className='col-md-4 mr-auto'>
+				<div className='col-sm-6 mr-auto'>
 					<SortFilterButton posts={posts} setPosts={setPosts} />
 				</div>
 			</div>

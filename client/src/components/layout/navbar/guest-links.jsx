@@ -24,10 +24,14 @@ const GuestLinks = () => (
 				</NavLink>
 			</li>
 			<li className='nav-item'>
-				<NavLink className='nav-link btn text-dark' to='/posts'>
-					<i className='fas fa-clipboard mx-2 '></i>Posts
+				<NavLink
+					className='btn btn-info nav-link text-white mr-4 px-3'
+					to='/posts'
+				>
+					Posts
 				</NavLink>
 			</li>
+
 			<li className='nav-item'>
 				<NavLink
 					className='btn btn-dark nav-link text-white mr-4'

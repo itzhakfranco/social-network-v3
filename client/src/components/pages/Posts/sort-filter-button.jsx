@@ -15,7 +15,7 @@ const SortFilterButton = ({ posts, setPosts }) => {
 			<NavLink
 				onClick={(e) => handleFilterButton(e)}
 				to='#'
-				className='btn btn-dark'
+				className='btn btn-dark mx-1'
 			>
 				Newest
 			</NavLink>

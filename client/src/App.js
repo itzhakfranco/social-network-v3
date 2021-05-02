@@ -32,16 +32,12 @@ function App() {
 				<Switch>
 					<Route path='/user/signup' component={Signup} />
 					<Route path='/user/signin' component={Signin} />
-					<ProtectedRoute path='/add-post' component={AddPost} />
-					<ProtectedRoute
-						exact
-						path='/user/profile/'
-						component={MemberProfilePage}
-					/>
 					<Route path='/profiles/:id' component={GuestProfilePage} />
 					<Route path='/profiles' component={ProfilesPage} />
 					<Route path='/posts' component={PostsPage} />
 					<ProtectedRoute path='/user/dashboard' component={Dashboard} />
+					<ProtectedRoute path='/add-post' component={AddPost} />
+
 					<ProtectedRoute path='/user/create-profile' component={ProfileForm} />
 
 					<ProtectedRoute
@@ -65,6 +61,7 @@ function App() {
 						path='/user/profile/edit/:id'
 						component={ProfileForm}
 					/>
+					<ProtectedRoute path='/user/profile/' component={MemberProfilePage} />
 					<Route path='/' component={HomePage} />
 				</Switch>
 			</main>

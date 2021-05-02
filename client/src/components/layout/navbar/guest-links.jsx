@@ -17,23 +17,6 @@ const GuestLinks = () => (
 		<ul className='navbar-nav ml-auto'>
 			<li className='nav-item'>
 				<NavLink
-					className='btn btn-primary nav-link text-white mr-4'
-					to='/add-post'
-				>
-					<i className='fas fa-plus-circle mx-1'></i>Add Post
-				</NavLink>
-			</li>
-			<li className='nav-item'>
-				<NavLink
-					className='btn btn-info nav-link text-white mr-4 px-3'
-					to='/posts'
-				>
-					Posts
-				</NavLink>
-			</li>
-
-			<li className='nav-item'>
-				<NavLink
 					className='btn btn-dark nav-link text-white mr-4'
 					to='/user/signup'
 				>

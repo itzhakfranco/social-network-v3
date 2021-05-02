@@ -11,7 +11,7 @@ const SortFilterButton = ({ posts, setPosts }) => {
 		}
 	};
 	return (
-		<div className='btn-group float-left mt-5'>
+		<div className='btn-group mt-5'>
 			<NavLink
 				onClick={(e) => handleFilterButton(e)}
 				to='#'

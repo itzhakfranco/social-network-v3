@@ -65,7 +65,7 @@ router.put("/:id", auth, async (req, res) => {
 });
 
 //Fetch All Profiles
-router.get("/view/profiles", auth, async (req, res) => {
+router.get("/view/profiles", async (req, res) => {
 	const profiles = await Profile.find({});
 
 	if (!profiles) return res.status(500).send("Server Error");
@@ -83,7 +83,7 @@ router.get("/", auth, async (req, res) => {
 });
 
 //Fetch Profile By Id
-router.get("/:id", auth, async (req, res) => {
+router.get("/:id", async (req, res) => {
 	const profile = await Profile.findOne({
 		_id: req.params.id,
 	});

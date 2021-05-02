@@ -8,7 +8,7 @@ import ProfilleActions from "./profile-actions";
 import ExperienceSection from "./experience-section";
 import EducationSection from "./education-section";
 
-const MemberProfilePage = ({
+const GuestProfilePage = ({
 	fetchProfileById,
 	match,
 	profile,
@@ -26,7 +26,10 @@ const MemberProfilePage = ({
 	) : (
 		<>
 			<div className='container'>
-				<PageHeader title='guest profile' desc='desc' />
+				<PageHeader
+					title='Guest Profile Page'
+					desc='Here you can view another member profile page'
+				/>
 			</div>
 
 			{profile && (
@@ -47,6 +50,4 @@ const mapStateToProps = (state) => ({
 	user_id: state.user.user_id,
 });
 
-export default connect(mapStateToProps, { fetchProfileById })(
-	MemberProfilePage
-);
+export default connect(mapStateToProps, { fetchProfileById })(GuestProfilePage);

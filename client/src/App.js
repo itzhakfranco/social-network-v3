@@ -32,17 +32,17 @@ function App() {
 				<Switch>
 					<Route path='/user/signup' component={Signup} />
 					<Route path='/user/signin' component={Signin} />
-					<Route path='/add-post' component={AddPost} />
+					<ProtectedRoute path='/add-post' component={AddPost} />
 					<ProtectedRoute
 						exact
 						path='/user/profile/'
 						component={MemberProfilePage}
 					/>
+					<Route path='/profiles/:id' component={GuestProfilePage} />
+					<Route path='/profiles' component={ProfilesPage} />
+					<Route path='/posts' component={PostsPage} />
 					<ProtectedRoute path='/user/dashboard' component={Dashboard} />
 					<ProtectedRoute path='/user/create-profile' component={ProfileForm} />
-					<ProtectedRoute path='/posts' component={PostsPage} />
-					<ProtectedRoute path='/profiles/:id' component={GuestProfilePage} />
-					<ProtectedRoute path='/profiles' component={ProfilesPage} />
 
 					<ProtectedRoute
 						path='/user/experience/edit/:id'

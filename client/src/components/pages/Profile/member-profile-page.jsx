@@ -18,7 +18,10 @@ const MemberProfilePage = ({ fetchUserProfile, profile, loading, user_id }) => {
 	) : (
 		<>
 			<div className='container'>
-				<PageHeader title='member profile' desc='desc' />
+				<PageHeader
+					title='My Profile'
+					desc='Here you can view, edit or delete your profile'
+				/>
 			</div>
 			{profile && (
 				<div className='container'>

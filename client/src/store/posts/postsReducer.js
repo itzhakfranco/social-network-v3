@@ -8,7 +8,6 @@ const intialState = {
 const postsReducer = (state = intialState, action) => {
 	switch (action.type) {
 		case actionTypes.FETCH_POSTS_REQUEST:
-		case actionTypes.DELETE_POST_REQUEST:
 		case actionTypes.ADD_POST_REQUEST:
 			return {
 				...state,
@@ -26,7 +25,7 @@ const postsReducer = (state = intialState, action) => {
 				posts: [action.payload, ...state.posts],
 				loading: false,
 			};
-		case actionTypes.DELETE_POST_SUCCESS:
+		case actionTypes.DELETE_POST:
 			return {
 				...state,
 				posts: state.posts.filter((post) => post._id !== action.payload),

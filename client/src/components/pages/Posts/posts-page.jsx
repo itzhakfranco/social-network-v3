@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
+import { Link } from "react-router-dom";
 import PostItem from "./post-item";
 import PageHeader from "../../common/page-header";
+import FilterButton from "./filter-button";
+
 import { fetchPosts } from "../../../store/posts/postsActions";
 
 const PostsPage = ({ fetchPosts, userId }) => {
@@ -23,6 +26,16 @@ const PostsPage = ({ fetchPosts, userId }) => {
 			<div className='row'>
 				<div className='col-lg-12'>
 					<PageHeader title='Posts Page' desc='Here You can view all posts' />
+				</div>
+			</div>
+			<div className='row'>
+				<div className='col-md-4 m-auto text-center'>
+					<Link className='btn btn-success px-5' to='/user/add-post'>
+						<i className='fas fa-plus-circle mx-1'></i> Add Post
+					</Link>
+				</div>
+				<div className='col-md-4 mr-auto'>
+					<FilterButton posts={posts} setPosts={setPosts} />
 				</div>
 			</div>
 			{posts?.length > 0 && (

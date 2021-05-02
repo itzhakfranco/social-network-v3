@@ -27,12 +27,9 @@ export const addPost = (formData) => async (dispatch) => {
 	});
 };
 export const deletePost = (postId) => async (dispatch) => {
-	dispatch({
-		type: actionTypes.DELETE_POST_REQUEST,
-	});
 	await http.delete(`/posts/${postId}`);
 
 	dispatch({
-		type: actionTypes.DELETE_POST_SUCCESS,
+		type: actionTypes.DELETE_POST,
 	});
 };

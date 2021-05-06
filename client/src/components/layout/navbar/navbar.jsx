@@ -12,7 +12,7 @@ const Navbar = ({ token, profile, name, logout }) => {
 		<nav className='navbar navbar-expand-lg navbar-light shadow-sm'>
 			<div className='container'>
 				<Link className='navbar-brand' to='/'>
-					The Social Network 3.0
+					The Social Network 2.0
 				</Link>
 				<button
 					className='navbar-toggler'

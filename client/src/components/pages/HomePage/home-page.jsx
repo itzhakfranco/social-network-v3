@@ -11,7 +11,7 @@ const HomePage = ({ token }) => {
 		<section className='landing'>
 			<div className='dark-overlay'>
 				<div className='landing-inner'>
-					<h1 className='x-large'>The Social Network 3.0</h1>
+					<h1 className='x-large'>The Social Network 2.0</h1>
 					<p className='lead'>
 						Create a profile/portfolio, view other users profiles and share posts and get help from
 						other developers

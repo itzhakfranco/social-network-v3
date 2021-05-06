@@ -32,13 +32,14 @@ const ProfileHeader = ({ profile }) => {
 					<div className='text-center bg-light border'>
 						<div className='col-md-8 col-lg-6 col-xl-5 p-0 mx-auto mb-4'>
 							<h4 className='font-weight-bold text-dark my-4'>Skill Set</h4>
-							{profile.skills.map((skill, index) => (
-								<div key={index}>
-									<span className='badge badge-pill badge-primary mx-2'>
-										{skill}
-									</span>
-								</div>
-							))}
+							{profile.skills?.length > 0 &&
+								profile.skills.map((skill, index) => (
+									<div key={index}>
+										<span className='badge badge-pill badge-primary mx-2'>
+											{skill}
+										</span>
+									</div>
+								))}
 						</div>
 					</div>
 				</div>
@@ -48,3 +49,4 @@ const ProfileHeader = ({ profile }) => {
 };
 
 export default ProfileHeader;
+
